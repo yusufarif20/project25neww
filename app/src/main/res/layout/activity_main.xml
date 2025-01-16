@@ -3,10 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Gambar latar belakang -->
     <ImageView
         android:id="@+id/splashBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/splash" />
+
+    <!-- Gambar teks -->
+    <ImageView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/text" />
 </RelativeLayout>
