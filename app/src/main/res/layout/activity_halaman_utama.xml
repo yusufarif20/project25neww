@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Gambar latar belakang -->
     <ImageView
         android:id="@+id/splashBackground"
         android:layout_width="match_parent"
@@ -11,7 +10,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/halamanmulai" />
 
-    <!-- Tombol play dekat bagian bawah -->
     <ImageView
         android:id="@+id/Buttonmulai"
         android:layout_width="100dp"
@@ -21,4 +19,35 @@
         android:layout_marginBottom="100dp"
         android:scaleType="centerInside"
         android:src="@drawable/playbutton" />
+
+    <ImageView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/text" />
+
+    <ImageView
+        android:id="@+id/robot"
+        android:layout_width="600dp"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/robot" />
+
+    <ImageView
+        android:id="@+id/kata"
+        android:layout_width="600dp"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/kata" />
 </RelativeLayout>

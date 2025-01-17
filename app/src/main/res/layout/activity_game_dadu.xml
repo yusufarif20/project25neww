@@ -7,4 +7,199 @@
     android:layout_height="match_parent"
     tools:context=".GameDadu">
 
+    <ImageView
+        android:id="@+id/splashBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/layoutdadu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnhome"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/splashBackground"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.096" />
+
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnprofile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/splashBackground"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.096" />
+
+    <ImageView
+        android:id="@+id/next"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnnext"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/splashBackground"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintStart_toStartOf="@+id/splashBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.523" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnback"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/splashBackground"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="@+id/splashBackground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.523" />
+
+    <FrameLayout
+        android:id="@+id/frame_dadu1"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:clickable="true"
+        android:foregroundGravity="center"
+        android:src="@drawable/border"
+        app:layout_constraintBottom_toBottomOf="@+id/splashBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.621"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4">
+
+        <ImageView
+            android:id="@+id/border_dadu1"
+            android:layout_width="68dp"
+            android:layout_height="77dp"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:src="@drawable/border" />
+
+        <ImageView
+            android:id="@+id/dadu1"
+            android:layout_width="60dp"
+            android:layout_height="69dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:src="@drawable/dadutiga"
+            android:contentDescription="Gambar dadu nomor tiga"/>
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/frame_dadu2"
+        android:layout_width="66dp"
+        android:layout_height="75dp"
+        android:clickable="true"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/splashBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.759"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4">
+
+        <ImageView
+            android:id="@+id/border_dadu2"
+            android:layout_width="68dp"
+            android:layout_height="77dp"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:src="@drawable/border" />
+
+        <ImageView
+            android:id="@+id/dadu2"
+            android:layout_width="60dp"
+            android:layout_height="69dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/dadusatu"
+            android:layout_gravity="center"
+            android:contentDescription="Gambar dadu nomor tiga"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_dadu3"
+        android:layout_width="66dp"
+        android:layout_height="75dp"
+        android:clickable="true"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/splashBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.621"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.691">
+
+        <ImageView
+            android:id="@+id/border_dadu3"
+            android:layout_width="68dp"
+            android:layout_height="77dp"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:src="@drawable/border" />
+
+        <ImageView
+            android:id="@+id/dadu3"
+            android:layout_width="60dp"
+            android:layout_height="69dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/daduempat"
+            android:layout_gravity="center"
+            android:contentDescription="Gambar dadu nomor tiga"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_dadu4"
+        android:layout_width="66dp"
+        android:layout_height="75dp"
+        android:clickable="true"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/splashBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.759"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.691">
+
+        <ImageView
+            android:id="@+id/border_dadu4"
+            android:layout_width="68dp"
+            android:layout_height="77dp"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:src="@drawable/border" />
+
+        <ImageView
+            android:id="@+id/dadu4"
+            android:layout_width="60dp"
+            android:layout_height="69dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/daduenam"
+            android:layout_gravity="center"
+            android:contentDescription="Gambar dadu nomor tiga"/>
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
