@@ -1,6 +1,7 @@
 package com.example.project25
 
 import Question
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -8,7 +9,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class GameDadu : AppCompatActivity() {
-
+    // Previous properties remain the same
     private val questions = listOf(
         Question(
             backgroundImage = R.drawable.layoutdadu,
@@ -34,11 +35,11 @@ class GameDadu : AppCompatActivity() {
             backgroundImage = R.drawable.layoutdadutiga,
             answers = listOf(
                 R.drawable.dadulima,
+                R.drawable.dadutiga,
                 R.drawable.dadusatu,
-                R.drawable.dadudua,
-                R.drawable.daduempat
+                R.drawable.dadudua
             ),
-            correctAnswerIndex = 1
+            correctAnswerIndex = 0
         ),
         Question(
             backgroundImage = R.drawable.layoutdaduempat,
@@ -58,29 +59,33 @@ class GameDadu : AppCompatActivity() {
                 R.drawable.daduenam,
                 R.drawable.daduempat
             ),
-            correctAnswerIndex = 0
+            correctAnswerIndex = 1
         )
     )
     private var currentQuestionIndex = 0
     private var currentScore: Int = 0
+    private var True: Int = 0
+    private var False: Int = 0
+    private var selectedAnswerIndex: Int? = null  // Add this to track selected answer
     private lateinit var questionBackground: ImageView
     private lateinit var answerImageViews: List<ImageView>
     private lateinit var framesWithBorders: List<Pair<FrameLayout, ImageView>>
+    private lateinit var submitButton: ImageView
     private lateinit var backButton: ImageView
     private lateinit var nextButton: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Previous onCreate implementation remains the same until nextButton click listener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_dadu)
 
-        // Inisialisasi background
         questionBackground = findViewById(R.id.splashBackground)
-
-        // Inisialisasi tombol
+        submitButton = findViewById(R.id.submit)
         backButton = findViewById(R.id.back)
         nextButton = findViewById(R.id.next)
 
-        // Inisialisasi ImageView untuk jawaban
+        submitButton.visibility = View.GONE
+
         answerImageViews = listOf(
             findViewById(R.id.dadu1),
             findViewById(R.id.dadu2),
@@ -88,7 +93,6 @@ class GameDadu : AppCompatActivity() {
             findViewById(R.id.dadu4)
         )
 
-        // Inisialisasi framesWithBorders
         framesWithBorders = listOf(
             Pair(findViewById(R.id.frame_dadu1), findViewById(R.id.border_dadu1)),
             Pair(findViewById(R.id.frame_dadu2), findViewById(R.id.border_dadu2)),
@@ -96,20 +100,31 @@ class GameDadu : AppCompatActivity() {
             Pair(findViewById(R.id.frame_dadu4), findViewById(R.id.border_dadu4))
         )
 
-        // Set initial back button visibility
         updateBackButtonVisibility()
 
         nextButton.setOnClickListener {
-            // Reset semua border saat pindah ke pertanyaan berikutnya
-            resetAllBorders()
+            // Check answer and update score before moving to next question
+            checkAnswerAndUpdateScore()
 
+            // Reset selected answer
+            selectedAnswerIndex = null
+
+            // Reset borders and move to next question
+            resetAllBorders()
             currentQuestionIndex = (currentQuestionIndex + 1) % questions.size
+
+            if (currentQuestionIndex == questions.size - 1) {
+                nextButton.visibility = View.GONE
+                submitButton.visibility = View.VISIBLE
+            }
+
             loadQuestion(currentQuestionIndex)
             updateBackButtonVisibility()
         }
 
         backButton.setOnClickListener {
             if (currentQuestionIndex > 0) {
+                selectedAnswerIndex = null
                 resetAllBorders()
                 currentQuestionIndex--
                 loadQuestion(currentQuestionIndex)
@@ -117,11 +132,34 @@ class GameDadu : AppCompatActivity() {
             }
         }
 
+        submitButton.setOnClickListener {
+            // Check final answer before submitting
+            checkAnswerAndUpdateScore()
+
+            val intent = Intent(this, HasilQuiz::class.java)
+            intent.putExtra("currentScore", currentScore)
+            intent.putExtra("True", True)
+            intent.putExtra("False", False)
+            startActivity(intent)
+            finish()
+        }
+
         loadQuestion(currentQuestionIndex)
     }
 
+    private fun checkAnswerAndUpdateScore() {
+        selectedAnswerIndex?.let { selected ->
+            val isCorrect = selected == questions[currentQuestionIndex].correctAnswerIndex
+            if (isCorrect) {
+                True += 1
+                currentScore += 20
+            } else {
+                False += 1
+            }
+        }
+    }
+
     private fun updateBackButtonVisibility() {
-        // Tampilkan tombol back hanya jika berada di pertanyaan ke-2 atau lebih
         backButton.visibility = if (currentQuestionIndex > 0) View.VISIBLE else View.GONE
     }
 
@@ -134,38 +172,28 @@ class GameDadu : AppCompatActivity() {
 
     private fun loadQuestion(index: Int) {
         val question = questions[index]
-
-        // Ganti gambar latar belakang
         questionBackground.setImageResource(question.backgroundImage)
 
-        // Update gambar pilihan jawaban
         answerImageViews.forEachIndexed { i, imageView ->
             imageView.setImageResource(question.answers[i])
         }
 
-        // Atur gambar pilihan jawaban dan logika klik
         framesWithBorders.forEachIndexed { i, pair ->
             val frame = pair.first
             val border = pair.second
 
-            // Reset border
             border.visibility = View.GONE
             frame.setBackgroundResource(0)
 
-            // Atur klik untuk pilihan jawaban
             frame.setOnClickListener {
-                val isCorrect = i == question.correctAnswerIndex
-
-                // Reset semua border terlebih dahulu
+                // Reset all borders first
                 resetAllBorders()
 
-                // Tampilkan border untuk pilihan yang dipilih
+                // Show border for selected answer
                 border.visibility = View.VISIBLE
 
-                // Tambahkan poin jika benar
-                if (isCorrect) {
-                    currentScore += 10
-                }
+                // Update selected answer index
+                selectedAnswerIndex = i
             }
         }
     }
