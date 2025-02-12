@@ -136,7 +136,7 @@ class GameDadu : AppCompatActivity() {
             // Check final answer before submitting
             checkAnswerAndUpdateScore()
 
-            val intent = Intent(this, HasilQuiz::class.java)
+            val intent = Intent(this, rute::class.java)
             intent.putExtra("currentScore", currentScore)
             intent.putExtra("True", True)
             intent.putExtra("False", False)
