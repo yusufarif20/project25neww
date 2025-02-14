@@ -13,7 +13,7 @@ import android.widget.Toast
 
 class rute : AppCompatActivity() {
     private lateinit var player: ImageView
-    private val stepSize = 105f
+    private val stepSize = 50f
     private val walls = mutableListOf<ImageView>()
     private var monster: Int = 0
 
@@ -31,6 +31,8 @@ class rute : AppCompatActivity() {
         player = findViewById(R.id.player)
         // Tambahkan semua tembok ke dalam list
         walls.add(findViewById(R.id.tempat))
+        walls.add(findViewById(R.id.tempat2))
+        walls.add(findViewById(R.id.tempat3))
         walls.add(findViewById(R.id.hadiah))
         walls.add(findViewById(R.id.hadiah2))
         walls.add(findViewById(R.id.goa))
