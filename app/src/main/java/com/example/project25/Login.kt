@@ -11,6 +11,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class Login : AppCompatActivity() {
+
+    var monster : Int = 5
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -20,7 +23,8 @@ class Login : AppCompatActivity() {
         val btn_login = findViewById<ImageView>(R.id.btnlogin)
 
         btn_login.setOnClickListener{
-            val intent = Intent(this,GameDadu::class.java)
+            val intent = Intent(this,rute::class.java)
+            intent.putExtra("monster", monster)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_down)
             finish()

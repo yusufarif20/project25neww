@@ -77,7 +77,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/btnback"
+        android:src="@drawable/btnleft"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/splashBackground"
         app:layout_constraintHorizontal_bias="0.044"

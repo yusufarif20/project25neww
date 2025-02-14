@@ -67,6 +67,7 @@ class GameDadu : AppCompatActivity() {
     private var True: Int = 0
     private var False: Int = 0
     private var selectedAnswerIndex: Int? = null  // Add this to track selected answer
+
     private lateinit var questionBackground: ImageView
     private lateinit var answerImageViews: List<ImageView>
     private lateinit var framesWithBorders: List<Pair<FrameLayout, ImageView>>
@@ -83,6 +84,7 @@ class GameDadu : AppCompatActivity() {
         submitButton = findViewById(R.id.submit)
         backButton = findViewById(R.id.back)
         nextButton = findViewById(R.id.next)
+        var monster = intent.getIntExtra("monster", 0)
 
         submitButton.visibility = View.GONE
 
@@ -137,7 +139,8 @@ class GameDadu : AppCompatActivity() {
             checkAnswerAndUpdateScore()
 
             val intent = Intent(this, rute::class.java)
-            intent.putExtra("currentScore", currentScore)
+            monster -= 1
+            intent.putExtra("monster", monster)
             intent.putExtra("True", True)
             intent.putExtra("False", False)
             startActivity(intent)

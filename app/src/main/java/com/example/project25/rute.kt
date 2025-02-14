@@ -2,12 +2,12 @@ package com.example.project25
 
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Rect
+import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.Toast
 
@@ -15,6 +15,7 @@ class rute : AppCompatActivity() {
     private lateinit var player: ImageView
     private val stepSize = 105f
     private val walls = mutableListOf<ImageView>()
+    private var monster: Int = 0
 
     // Boundaries
     private var minX = 0f
@@ -29,8 +30,23 @@ class rute : AppCompatActivity() {
 
         player = findViewById(R.id.player)
         // Tambahkan semua tembok ke dalam list
+        walls.add(findViewById(R.id.tempat))
         walls.add(findViewById(R.id.hadiah))
+        walls.add(findViewById(R.id.hadiah2))
+        walls.add(findViewById(R.id.goa))
+        val hadiah = findViewById<ImageView>(R.id.hadiah)
+        val hadiah2 = findViewById<ImageView>(R.id.hadiah2)
         // Tambahkan tembok lainnya jika ada
+
+        monster = intent.getIntExtra("monster", 0)
+
+        if (monster < 5) {
+            hadiah.visibility = View.GONE
+        }
+        if (monster < 4) {
+            hadiah2.visibility = View.GONE
+        }
+
 
         val forward = findViewById<ImageView>(R.id.forward)
         val backward = findViewById<ImageView>(R.id.backward)
@@ -47,7 +63,8 @@ class rute : AppCompatActivity() {
 
     private fun setupBoundaries() {
         val containerView = findViewById<android.view.View>(R.id.main)
-        containerView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        containerView.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 containerView.viewTreeObserver.removeOnGlobalLayoutListener(this)
 
@@ -95,6 +112,30 @@ class rute : AppCompatActivity() {
             "backward" -> player.translationY + stepSize
             else -> player.translationY
         }
+        val hadiah = findViewById<ImageView>(R.id.hadiah)
+
+        if (willCollideWithObject(hadiah, newX, newY)) {
+            val intent = Intent(this, GameDadu::class.java)
+            intent.putExtra("monster", monster)
+            startActivity(intent)
+            return
+        }
+        val hadiah2 = findViewById<ImageView>(R.id.hadiah2)
+
+        if (willCollideWithObject(hadiah2, newX, newY)) {
+            val intent = Intent(this, GameUang::class.java)
+            intent.putExtra("monster", monster)
+            startActivity(intent)
+            return
+        }
+        val goa = findViewById<ImageView>(R.id.goa)
+
+        if (willCollideWithObject(goa, newX, newY)) {
+            val intent = Intent(this, HasilQuiz::class.java)
+            intent.putExtra("monster", monster)
+            startActivity(intent)
+            return
+        }
 
         if (isValidPosition(newX, newY) && !willCollideWithAnyWall(newX, newY)) {
             val animator = when (direction) {
@@ -110,8 +151,7 @@ class rute : AppCompatActivity() {
                 start()
             }
         } else {
-            val intent = Intent(this,GameDadu::class.java)
-            startActivity(intent)
+            Toast.makeText(this, "Tidak bisa bergerak ke arah tersebut!", Toast.LENGTH_SHORT).show()
         }
     }
 
