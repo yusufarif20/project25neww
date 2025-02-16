@@ -34,6 +34,7 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
         val duaribu2 = findViewById<ImageView>(R.id.duaribu2)
         val limaribu = findViewById<ImageView>(R.id.limaribu)
         val limaratus = findViewById<ImageView>(R.id.limaratus)
+        val limaratus2 = findViewById<ImageView>(R.id.limaratus2)
         val seribu = findViewById<ImageView>(R.id.seribu)
         val seribukoin = findViewById<ImageView>(R.id.seribukoin)
         val duaratus = findViewById<ImageView>(R.id.duaratus)
@@ -45,6 +46,7 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
         duaribu.setOnTouchListener(this)
         duaribu2.setOnTouchListener(this)
         limaratus.setOnTouchListener(this)
+        limaratus2.setOnTouchListener(this)
         limaribu.setOnTouchListener(this)
         seribu.setOnTouchListener(this)
         seribukoin.setOnTouchListener(this)
@@ -54,6 +56,7 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
         viewValues[R.id.duaribu] = 2000
         viewValues[R.id.duaribu2] = 2000
         viewValues[R.id.limaratus] = 500
+        viewValues[R.id.limaratus2] = 500
         viewValues[R.id.limaribu] = 5000
         viewValues[R.id.seribu] = 1000
         viewValues[R.id.seribukoin] = 1000

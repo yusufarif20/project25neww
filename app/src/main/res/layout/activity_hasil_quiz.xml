@@ -52,14 +52,14 @@
         android:layout_height="55dp"
         android:fontFamily="@font/bungee"
         android:text="TextView"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/splashBackground"
-        app:layout_constraintHorizontal_bias="0.835"
+        app:layout_constraintHorizontal_bias="0.316"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="0.421" />
 
     <TextView
         android:id="@+id/TextView"
@@ -68,7 +68,7 @@
         android:fontFamily="@font/bungee"
         android:scaleType="centerCrop"
         android:text="TextView"
-        android:textColor="@color/blue"
+        android:textColor="@color/black"
         android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/splashBackground"
@@ -83,28 +83,26 @@
         android:layout_height="55dp"
         android:fontFamily="@font/bungee"
         android:text="TextView"
-        android:textColor="@color/green"
+        android:textColor="@color/black"
         android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/splashBackground"
-        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintHorizontal_bias="0.316"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.630" />
+        app:layout_constraintVertical_bias="0.575" />
 
-    <TextView
-        android:id="@+id/FalseTextView"
-        android:layout_width="146dp"
-        android:layout_height="55dp"
-        android:fontFamily="@font/bungee"
-        android:text="TextView"
-        android:textColor="@color/red"
-        android:textSize="21sp"
+    <ImageView
+        android:id="@+id/submit"
+        android:layout_width="169dp"
+        android:layout_height="46dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnselanjutnya"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/splashBackground"
-        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.785" />
+        app:layout_constraintVertical_bias="0.914" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

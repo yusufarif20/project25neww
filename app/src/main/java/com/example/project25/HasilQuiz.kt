@@ -1,6 +1,8 @@
 package com.example.project25
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -19,7 +21,7 @@ class HasilQuiz : AppCompatActivity() {
         val resultTextView = findViewById<TextView>(R.id.TextView)
         val scoreTextView = findViewById<TextView>(R.id.scoreTextView)
         val trueTextView = findViewById<TextView>(R.id.TrueTextView)
-        val falseTextView = findViewById<TextView>(R.id.FalseTextView)
+        val submit = findViewById<ImageView>(R.id.submit)
 
         // Logika hasil berdasarkan jumlah jawaban benar dan salah
         if (True > 3) {
@@ -33,6 +35,11 @@ class HasilQuiz : AppCompatActivity() {
         // Tampilkan skor, jumlah benar, dan salah
         scoreTextView.text = "$currentScore"
         trueTextView.text = "$True"
-        falseTextView.text = "$False"
+
+        submit.setOnClickListener {
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

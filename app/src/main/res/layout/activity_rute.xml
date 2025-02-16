@@ -22,105 +22,230 @@
         app:layout_constraintVertical_bias="0.34" />
 
     <ImageView
-        android:id="@+id/tempat6"
+        android:id="@+id/tempat"
         android:layout_width="5dp"
         android:layout_height="70dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.371"
+        app:layout_constraintHorizontal_bias="0.374"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.364" />
+        app:layout_constraintVertical_bias="0.322" />
 
     <ImageView
-        android:id="@+id/tempat3"
-        android:layout_width="5dp"
-        android:layout_height="90dp"
+        android:id="@+id/wall3"
+        android:layout_width="3dp"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.265"
+        app:layout_constraintHorizontal_bias="0.804"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintVertical_bias="0.308" />
+
+    <ImageView
+        android:id="@+id/wall1"
+        android:layout_width="3dp"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.308" />
+
+    <ImageView
+        android:id="@+id/tempat2"
+        android:layout_width="3dp"
+        android:layout_height="88dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.281"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.151" />
+
+    <ImageView
+        android:id="@+id/tempat3"
+        android:layout_width="3dp"
+        android:layout_height="88dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.117" />
 
     <ImageView
         android:id="@+id/tempat4"
+        android:layout_width="3dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.665"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.47" />
+
+    <ImageView
+        android:id="@+id/tempat5"
+        android:layout_width="3dp"
+        android:layout_height="88dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.452" />
+
+    <ImageView
+        android:id="@+id/tempat6"
+        android:layout_width="3dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.736"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.311" />
+
+    <ImageView
+        android:id="@+id/tempat7"
+        android:layout_width="3dp"
+        android:layout_height="28dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.237"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.532" />
+
+    <ImageView
+        android:id="@+id/tempat8"
         android:layout_width="3dp"
         android:layout_height="32dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.214"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintVertical_bias="0.142" />
 
     <ImageView
-        android:id="@+id/tempat5"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:rotation="270"
+        android:id="@+id/tempat9"
+        android:layout_width="3dp"
+        android:layout_height="32dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintHorizontal_bias="0.541"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.275" />
+        app:layout_constraintVertical_bias="0.625" />
 
     <ImageView
-        android:id="@+id/tempat7"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:rotation="270"
+        android:id="@+id/tempat10"
+        android:layout_width="3dp"
+        android:layout_height="32dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.316"
+        app:layout_constraintHorizontal_bias="0.385"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.314" />
+        app:layout_constraintVertical_bias="0.63" />
 
     <ImageView
-        android:id="@+id/tempat8"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:rotation="270"
+        android:id="@+id/tempat11"
+        android:layout_width="3dp"
+        android:layout_height="32dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.345"
+        app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.275" />
+        app:layout_constraintVertical_bias="0.303" />
 
     <ImageView
-        android:id="@+id/tempat2"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:rotation="270"
+        android:id="@+id/tempat12"
+        android:layout_width="3dp"
+        android:layout_height="32dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.270" />
+        app:layout_constraintVertical_bias="0.54" />
 
     <ImageView
-        android:id="@+id/tempat"
-        android:layout_width="12dp"
-        android:layout_height="15dp"
-        android:rotation="270"
+        android:id="@+id/tempat13"
+        android:layout_width="4dp"
+        android:layout_height="23dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.334"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.309" />
+
+    <ImageView
+        android:id="@+id/tempat14"
+        android:layout_width="31dp"
+        android:layout_height="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.199" />
+
+    <ImageView
+        android:id="@+id/tempat15"
+        android:layout_width="56dp"
+        android:layout_height="4dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.629"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.449" />
+
+    <ImageView
+        android:id="@+id/tempat16"
+        android:layout_width="60dp"
+        android:layout_height="5dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -128,12 +253,168 @@
         app:layout_constraintHorizontal_bias="0.596"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.522" />
+        app:layout_constraintVertical_bias="0.251" />
+
+    <ImageView
+        android:id="@+id/tempat17"
+        android:layout_width="31dp"
+        android:layout_height="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.27" />
+
+    <ImageView
+        android:id="@+id/tempat18"
+        android:layout_width="31dp"
+        android:layout_height="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.564" />
+
+    <ImageView
+        android:id="@+id/tempat19"
+        android:layout_width="31dp"
+        android:layout_height="3dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.782"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <ImageView
+        android:id="@+id/tempat20"
+        android:layout_width="31dp"
+        android:layout_height="1dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.691"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.586" />
+
+    <ImageView
+        android:id="@+id/tempat21"
+        android:layout_width="31dp"
+        android:layout_height="5dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.566" />
+
+    <ImageView
+        android:id="@+id/tempat22"
+        android:layout_width="28dp"
+        android:layout_height="4dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.251"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.27" />
+
+    <ImageView
+        android:id="@+id/tempat23"
+        android:layout_width="28dp"
+        android:layout_height="4dp"
+        android:rotation="270"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.459" />
+
+    <ImageView
+        android:id="@+id/wall2"
+        android:layout_width="430dp"
+        android:layout_height="4dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12" />
+
+    <ImageView
+        android:id="@+id/wall4"
+        android:layout_width="430dp"
+        android:layout_height="4dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.696" />
+
+    <ImageView
+        android:id="@+id/tempat24"
+        android:layout_width="60dp"
+        android:layout_height="4dp"
+        android:rotation="270"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.572" />
+
+    <ImageView
+        android:id="@+id/tempat25"
+        android:layout_width="28dp"
+        android:layout_height="4dp"
+        android:rotation="270"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.582" />
+
+    <ImageView
+        android:id="@+id/tempat26"
+        android:layout_width="6dp"
+        android:layout_height="71dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tempat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57" />
 
     <ImageView
         android:id="@+id/hadiah"
-        android:layout_width="40dp"
-        android:layout_height="41dp"
+        android:layout_width="37dp"
+        android:layout_height="35dp"
         android:scaleType="centerCrop"
         android:src="@drawable/monster"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -145,8 +426,8 @@
 
     <ImageView
         android:id="@+id/hadiah2"
-        android:layout_width="68dp"
-        android:layout_height="61dp"
+        android:layout_width="51dp"
+        android:layout_height="58dp"
         android:scaleType="centerCrop"
         android:src="@drawable/monster"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -155,6 +436,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.185" />
+
+    <ImageView
+        android:id="@+id/hadiah3"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/monster"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.419"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.368" />
 
     <ImageView
         android:id="@+id/goa"
