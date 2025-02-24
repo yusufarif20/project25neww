@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainMenu : AppCompatActivity(), View.OnClickListener {
 
+    var monster : Int = 0
+    private var lastPlayerX = 0f
+    private var lastPlayerY = 0f
+
     private lateinit var homeButton: FrameLayout
     private lateinit var mainButton: FrameLayout
     private lateinit var profileButton: FrameLayout
@@ -18,6 +22,10 @@ class MainMenu : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main_menu)
+
+        monster = intent.getIntExtra("monster", 0)
+        lastPlayerX = intent.getFloatExtra("lastX", 0f)
+        lastPlayerY = intent.getFloatExtra("lastY", 0f)
 
         // Initialize buttons
         homeButton = findViewById(R.id.fl_home)
@@ -34,12 +42,12 @@ class MainMenu : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.fl_home -> {
-            }
             R.id.fl_main -> {
-                // Navigate to Main activity
-                val intent = Intent(this, rute::class.java)
+                val intent = Intent(this,rute::class.java)
+                intent.putExtra("monster", monster)
                 startActivity(intent)
+                overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_down)
+                finish()
             }
             R.id.fl_profile -> {
                 // Navigate to Profile activity

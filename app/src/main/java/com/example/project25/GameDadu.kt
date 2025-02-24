@@ -66,27 +66,42 @@ class GameDadu : AppCompatActivity() {
     private var currentScore: Int = 0
     private var True: Int = 0
     private var False: Int = 0
-    private var selectedAnswerIndex: Int? = null  // Add this to track selected answer
+    private var selectedAnswerIndex: Int? = null
+    private var lastPlayerX = 0f
+    private var lastPlayerY = 0f
+
+    // Tambahan untuk sistem hadiah
+    private var currentHadiah = 0
+    private var completedHadiah = mutableSetOf<Int>()
 
     private lateinit var questionBackground: ImageView
     private lateinit var answerImageViews: List<ImageView>
     private lateinit var framesWithBorders: List<Pair<FrameLayout, ImageView>>
     private lateinit var submitButton: ImageView
     private lateinit var backButton: ImageView
-    private lateinit var nextButton: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Previous onCreate implementation remains the same until nextButton click listener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_dadu)
 
+        // Initialize views
         questionBackground = findViewById(R.id.splashBackground)
         submitButton = findViewById(R.id.submit)
         backButton = findViewById(R.id.back)
-        nextButton = findViewById(R.id.next)
+
+        // Get data from intent
+        lastPlayerX = intent.getFloatExtra("lastX", 0f)
+        lastPlayerY = intent.getFloatExtra("lastY", 0f)
         var monster = intent.getIntExtra("monster", 0)
 
-        submitButton.visibility = View.GONE
+        // Ambil data hadiah
+        currentHadiah = intent.getIntExtra("currentHadiah", 0)
+        val completedHadiahString = intent.getStringExtra("completedHadiah") ?: ""
+        completedHadiah = if (completedHadiahString.isEmpty()) {
+            mutableSetOf()
+        } else {
+            completedHadiahString.split(",").map { it.toInt() }.toMutableSet()
+        }
 
         answerImageViews = listOf(
             findViewById(R.id.dadu1),
@@ -104,26 +119,6 @@ class GameDadu : AppCompatActivity() {
 
         updateBackButtonVisibility()
 
-        nextButton.setOnClickListener {
-            // Check answer and update score before moving to next question
-            checkAnswerAndUpdateScore()
-
-            // Reset selected answer
-            selectedAnswerIndex = null
-
-            // Reset borders and move to next question
-            resetAllBorders()
-            currentQuestionIndex = (currentQuestionIndex + 1) % questions.size
-
-            if (currentQuestionIndex == questions.size - 1) {
-                nextButton.visibility = View.GONE
-                submitButton.visibility = View.VISIBLE
-            }
-
-            loadQuestion(currentQuestionIndex)
-            updateBackButtonVisibility()
-        }
-
         backButton.setOnClickListener {
             if (currentQuestionIndex > 0) {
                 selectedAnswerIndex = null
@@ -138,11 +133,19 @@ class GameDadu : AppCompatActivity() {
             // Check final answer before submitting
             checkAnswerAndUpdateScore()
 
+            // Tambahkan hadiah yang baru diselesaikan
+            completedHadiah.add(currentHadiah)
+
+            // Create intent for returning to route
             val intent = Intent(this, rute::class.java)
-            monster -= 1
+            // Add all necessary data to intent
+            intent.putExtra("lastX", lastPlayerX)
+            intent.putExtra("lastY", lastPlayerY)
             intent.putExtra("monster", monster)
             intent.putExtra("True", True)
             intent.putExtra("False", False)
+            intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
+
             startActivity(intent)
             finish()
         }
@@ -189,13 +192,8 @@ class GameDadu : AppCompatActivity() {
             frame.setBackgroundResource(0)
 
             frame.setOnClickListener {
-                // Reset all borders first
                 resetAllBorders()
-
-                // Show border for selected answer
                 border.visibility = View.VISIBLE
-
-                // Update selected answer index
                 selectedAnswerIndex = i
             }
         }

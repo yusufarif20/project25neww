@@ -11,18 +11,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import android.graphics.Rect
 
-class GamePizza : AppCompatActivity(), View.OnTouchListener {
+class GameNomor : AppCompatActivity(), View.OnTouchListener {
     private var dX = 0f
     private var dY = 0f
     private var counter = 0
-    private lateinit var textView: TextView
     private lateinit var keranjang: ImageView
     private lateinit var submitButton: ImageView
     private var droppedViews = mutableSetOf<ImageView>()
     private var viewValues = mutableMapOf<Int, Int>()
-    private val maxObjects = 4
+    private val maxObjects = 1
     private var isDraggable = true
-    private val targetValue = 3
+    private val targetValue = 6
     private var lastPlayerX = 0f
     private var lastPlayerY = 0f
 
@@ -33,15 +32,16 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_game_pizza)
+        setContentView(R.layout.activity_game_nomor)
 
-        // Inisialisasi view
-        textView = findViewById(R.id.TextView)
-        val pizza1 = findViewById<ImageView>(R.id.pizza1)
-        val pizza2 = findViewById<ImageView>(R.id.pizza2)
-        val pizza3 = findViewById<ImageView>(R.id.pizza3)
-        val pizza4 = findViewById<ImageView>(R.id.pizza4)
-        keranjang = findViewById(R.id.keranjang)
+        val satu = findViewById<ImageView>(R.id.satu)
+        val dua = findViewById<ImageView>(R.id.dua)
+        val tiga = findViewById<ImageView>(R.id.tiga)
+        val empat = findViewById<ImageView>(R.id.empat)
+        val lima = findViewById<ImageView>(R.id.lima)
+        val enam = findViewById<ImageView>(R.id.enam)
+        val tuju = findViewById<ImageView>(R.id.tuju)
+        keranjang = findViewById(R.id.kotak)
         submitButton = findViewById(R.id.submit)
 
         // Ambil data dari intent
@@ -59,19 +59,22 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
         }
 
         // Set touch listeners
-        pizza1.setOnTouchListener(this)
-        pizza2.setOnTouchListener(this)
-        pizza3.setOnTouchListener(this)
-        pizza4.setOnTouchListener(this)
+        satu.setOnTouchListener(this)
+        dua.setOnTouchListener(this)
+        tiga.setOnTouchListener(this)
+        empat.setOnTouchListener(this)
+        lima.setOnTouchListener(this)
+        enam.setOnTouchListener(this)
+        tuju.setOnTouchListener(this)
 
         // Initialize values for each view
-        viewValues[R.id.pizza1] = 1
-        viewValues[R.id.pizza2] = 1
-        viewValues[R.id.pizza3] = 1
-        viewValues[R.id.pizza4] = 1
-
-        // Initialize counter
-        textView.text = "0"
+        viewValues[R.id.satu] = 1
+        viewValues[R.id.dua] = 2
+        viewValues[R.id.tiga] = 3
+        viewValues[R.id.empat] = 4
+        viewValues[R.id.lima] = 5
+        viewValues[R.id.enam] = 6
+        viewValues[R.id.tuju] = 7
 
         submitButton.setOnClickListener {
             if (counter == targetValue) {
@@ -80,12 +83,11 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
 
                 // Buat intent untuk kembali ke rute
                 val intent = Intent(this, rute::class.java)
-                monster -= 1
 
                 // Masukkan semua data yang diperlukan
+                intent.putExtra("monster", monster)
                 intent.putExtra("lastX", lastPlayerX)
                 intent.putExtra("lastY", lastPlayerY)
-                intent.putExtra("monster", monster)
                 intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
 
                 startActivity(intent)
@@ -93,7 +95,7 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
             } else {
                 Toast.makeText(
                     this,
-                    "Pecahan Belum Benar",
+                    "Jawaban salah!",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -108,7 +110,7 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
                 if (droppedViews.size >= maxObjects && !droppedViews.contains(imageView)) {
                     Toast.makeText(
                         this,
-                        "Keranjang sudah penuh! Kurangi objek terlebih dahulu",
+                        "Kotak jawaban sudah penuh! Kurangi objek terlebih dahulu",
                         Toast.LENGTH_SHORT
                     ).show()
                     return false
@@ -132,12 +134,10 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
                 if (isViewOverlapping(imageView, keranjang)) {
                     if (!droppedViews.contains(imageView) && droppedViews.size < maxObjects) {
                         counter += value
-                        textView.text = counter.toString()
                         droppedViews.add(imageView)
                     }
                 } else if (!isViewOverlapping(imageView, keranjang) && droppedViews.contains(imageView)) {
                     counter -= value
-                    textView.text = counter.toString()
                     droppedViews.remove(imageView)
                 }
             }

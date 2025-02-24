@@ -23,16 +23,16 @@
 
     <ImageView
         android:id="@+id/tempat"
-        android:layout_width="5dp"
-        android:layout_height="70dp"
+        android:layout_width="1dp"
+        android:layout_height="25dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.374"
+        app:layout_constraintHorizontal_bias="0.386"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.322" />
+        app:layout_constraintVertical_bias="0.391" />
 
     <ImageView
         android:id="@+id/wall3"
@@ -76,15 +76,15 @@
     <ImageView
         android:id="@+id/tempat3"
         android:layout_width="3dp"
-        android:layout_height="88dp"
+        android:layout_height="70dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.155" />
 
     <ImageView
         android:id="@+id/tempat4"
@@ -102,15 +102,15 @@
     <ImageView
         android:id="@+id/tempat5"
         android:layout_width="3dp"
-        android:layout_height="88dp"
+        android:layout_height="75dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.452" />
+        app:layout_constraintVertical_bias="0.437" />
 
     <ImageView
         android:id="@+id/tempat6"
@@ -128,15 +128,15 @@
     <ImageView
         android:id="@+id/tempat7"
         android:layout_width="3dp"
-        android:layout_height="28dp"
+        android:layout_height="20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.237"
+        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532" />
+        app:layout_constraintVertical_bias="0.516" />
 
     <ImageView
         android:id="@+id/tempat8"
@@ -172,10 +172,10 @@
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.385"
+        app:layout_constraintHorizontal_bias="0.371"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintVertical_bias="0.641" />
 
     <ImageView
         android:id="@+id/tempat11"
@@ -237,10 +237,10 @@
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.629"
+        app:layout_constraintHorizontal_bias="0.635"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.449" />
+        app:layout_constraintVertical_bias="0.459" />
 
     <ImageView
         android:id="@+id/tempat16"
@@ -304,7 +304,7 @@
         app:layout_constraintHorizontal_bias="0.691"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.586" />
+        app:layout_constraintVertical_bias="0.58" />
 
     <ImageView
         android:id="@+id/tempat21"
@@ -314,10 +314,10 @@
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566" />
+        app:layout_constraintVertical_bias="0.581" />
 
     <ImageView
         android:id="@+id/tempat22"
@@ -341,10 +341,10 @@
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintHorizontal_bias="0.42"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.459" />
+        app:layout_constraintVertical_bias="0.422" />
 
     <ImageView
         android:id="@+id/wall2"
@@ -376,15 +376,14 @@
         android:id="@+id/tempat24"
         android:layout_width="60dp"
         android:layout_height="4dp"
-        android:rotation="270"
         android:scaleType="centerCrop"
         android:src="@drawable/tempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.22"
+        app:layout_constraintHorizontal_bias="0.202"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.572" />
+        app:layout_constraintVertical_bias="0.562" />
 
     <ImageView
         android:id="@+id/tempat25"
@@ -416,13 +415,26 @@
         android:layout_width="37dp"
         android:layout_height="35dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/monster"
+        android:src="@drawable/monsterkecil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.645" />
+        app:layout_constraintVertical_bias="0.632" />
+
+    <ImageView
+        android:id="@+id/hadiah4"
+        android:layout_width="35dp"
+        android:layout_height="36dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/monsterkecil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629" />
 
     <ImageView
         android:id="@+id/hadiah2"
@@ -442,13 +454,24 @@
         android:layout_width="52dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/monster"
+        android:src="@drawable/monsterkecil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.368" />
+        app:layout_constraintVertical_bias="0.35" />
+
+    <ImageView
+        android:id="@+id/hadiah5"
+        android:layout_width="37dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="304dp"
+        android:layout_marginBottom="232dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/monsterkecil"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/goa"
@@ -458,10 +481,10 @@
         android:src="@drawable/goa"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.638"
+        app:layout_constraintHorizontal_bias="0.646"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.535" />
+        app:layout_constraintVertical_bias="0.532" />
 
     <ImageView
         android:id="@+id/player"
@@ -471,18 +494,17 @@
         android:src="@drawable/player"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.175" />
+        app:layout_constraintVertical_bias="0.173" />
 
     <ImageView
         android:id="@+id/forward"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:rotation="270"
         android:scaleType="centerCrop"
-        android:src="@drawable/btnright"
+        android:src="@drawable/btnup"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.138"
@@ -494,9 +516,8 @@
         android:id="@+id/backward"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:rotation="90"
         android:scaleType="centerCrop"
-        android:src="@drawable/btnright"
+        android:src="@drawable/btndown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.85"
@@ -525,31 +546,50 @@
         android:src="@drawable/btnhome"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintHorizontal_bias="0.019"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.085" />
 
-    <ImageView
-        android:id="@+id/profile"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/btnprofile"
+    <LinearLayout
+        android:id="@+id/fl_star"
+        android:layout_width="59dp"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.099">
+
+        <TextView
+            android:id="@+id/star"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:fontFamily="@font/changaregular"
+            android:paddingEnd="4dp"
+            android:text="0"
+            android:textColor="@color/text_selector"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/obj_star"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/star" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/left"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/btnright"
-        android:rotation="180"
+        android:src="@drawable/btnleft"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"

@@ -60,19 +60,6 @@
         app:layout_constraintVertical_bias="0.096" />
 
     <ImageView
-        android:id="@+id/next"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/btnnext"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/splashBackground"
-        app:layout_constraintHorizontal_bias="0.949"
-        app:layout_constraintStart_toStartOf="@+id/splashBackground"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.523" />
-
-    <ImageView
         android:id="@+id/back"
         android:layout_width="50dp"
         android:layout_height="50dp"

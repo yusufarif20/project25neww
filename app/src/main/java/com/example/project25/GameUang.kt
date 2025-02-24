@@ -23,12 +23,19 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
     private val maxObjects = 4
     private var isDraggable = true
     private val targetValue = 5000
+    private var lastPlayerX = 0f
+    private var lastPlayerY = 0f
+
+    // Tambahan untuk sistem hadiah
+    private var currentHadiah = 0
+    private var completedHadiah = mutableSetOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_game_uang)
 
+        // Inisialisasi views
         textView = findViewById(R.id.TextView)
         val duaribu = findViewById<ImageView>(R.id.duaribu)
         val duaribu2 = findViewById<ImageView>(R.id.duaribu2)
@@ -40,7 +47,20 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
         val duaratus = findViewById<ImageView>(R.id.duaratus)
         keranjang = findViewById(R.id.keranjang)
         submitButton = findViewById(R.id.submit)
+
+        // Ambil data dari intent
+        lastPlayerX = intent.getFloatExtra("lastX", 0f)
+        lastPlayerY = intent.getFloatExtra("lastY", 0f)
         var monster = intent.getIntExtra("monster", 0)
+
+        // Ambil data hadiah
+        currentHadiah = intent.getIntExtra("currentHadiah", 0)
+        val completedHadiahString = intent.getStringExtra("completedHadiah") ?: ""
+        completedHadiah = if (completedHadiahString.isEmpty()) {
+            mutableSetOf()
+        } else {
+            completedHadiahString.split(",").map { it.toInt() }.toMutableSet()
+        }
 
         // Set touch listeners
         duaribu.setOnTouchListener(this)
@@ -67,9 +87,18 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
 
         submitButton.setOnClickListener {
             if (counter == targetValue) {
+                // Tambahkan hadiah yang baru diselesaikan
+                completedHadiah.add(currentHadiah)
+
+                // Buat intent untuk kembali ke rute
                 val intent = Intent(this, rute::class.java)
-                monster -= 1
+
+                // Masukkan semua data yang diperlukan
+                intent.putExtra("lastX", lastPlayerX)
+                intent.putExtra("lastY", lastPlayerY)
                 intent.putExtra("monster", monster)
+                intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
+
                 startActivity(intent)
                 finish()
             } else {
@@ -87,22 +116,19 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
 
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                // Check if basket is full and the view is not already in the basket
                 if (droppedViews.size >= maxObjects && !droppedViews.contains(imageView)) {
                     Toast.makeText(
                         this,
                         "Keranjang sudah penuh! Kurangi objek terlebih dahulu",
                         Toast.LENGTH_SHORT
                     ).show()
-                    return false // Prevent dragging
+                    return false
                 }
-                // Allow dragging for objects in basket or when basket isn't full
                 dX = view.x - event.rawX
                 dY = view.y - event.rawY
                 return true
             }
             MotionEvent.ACTION_MOVE -> {
-                // Only move the view if it's either in the basket or the basket isn't full
                 if (droppedViews.contains(imageView) || droppedViews.size < maxObjects) {
                     view.animate()
                         .x(event.rawX + dX)
@@ -116,13 +142,11 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
 
                 if (isViewOverlapping(imageView, keranjang)) {
                     if (!droppedViews.contains(imageView) && droppedViews.size < maxObjects) {
-                        // Add object if within limit
                         counter += value
                         textView.text = counter.toString()
                         droppedViews.add(imageView)
                     }
                 } else if (!isViewOverlapping(imageView, keranjang) && droppedViews.contains(imageView)) {
-                    // Remove object from basket
                     counter -= value
                     textView.text = counter.toString()
                     droppedViews.remove(imageView)

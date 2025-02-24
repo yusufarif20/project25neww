@@ -13,8 +13,12 @@ import android.view.ViewTreeObserver
 import android.widget.Toast
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 
 class rute : AppCompatActivity() {
+    companion object {
+        private const val TAG = "RuteGame"
+    }
     private lateinit var player: ImageView
     private val stepSize = 10f
     private val walls = mutableListOf<ImageView>()
@@ -23,6 +27,10 @@ class rute : AppCompatActivity() {
     private var isMoving = false
     private var currentDirection = ""
     private val moveDelay = 50L
+    private var lastPlayerX = 0f
+    private var lastPlayerY = 0f
+
+    private val completedHadiah = mutableSetOf<Int>()
 
     // Boundaries
     private var minX = 0f
@@ -79,23 +87,43 @@ class rute : AppCompatActivity() {
         walls.add(findViewById(R.id.hadiah))
         walls.add(findViewById(R.id.hadiah2))
         walls.add(findViewById(R.id.hadiah3))
+        walls.add(findViewById(R.id.hadiah4))
+        walls.add(findViewById(R.id.hadiah5))
         walls.add(findViewById(R.id.goa))
 
+        lastPlayerX = intent.getFloatExtra("lastX", 0f)
+        lastPlayerY = intent.getFloatExtra("lastY", 0f)
         monster = intent.getIntExtra("monster", 0)
+
+        val completedString = intent.getStringExtra("completedHadiah") ?: ""
+        if (completedString.isNotEmpty()) {
+            completedHadiah.addAll(completedString.split(",").map { it.toInt() })
+        }
+
+        val home = findViewById<ImageView>(R.id.home)
+
+        player.translationX = lastPlayerX
+        player.translationY = lastPlayerY
 
         val hadiah = findViewById<ImageView>(R.id.hadiah)
         val hadiah2 = findViewById<ImageView>(R.id.hadiah2)
         val hadiah3 = findViewById<ImageView>(R.id.hadiah3)
+        val hadiah4 = findViewById<ImageView>(R.id.hadiah4)
+        val hadiah5 = findViewById<ImageView>(R.id.hadiah5)
 
-        if (monster < 4) {
-            hadiah.visibility = View.GONE
-        }
-        if (monster < 3) {
-            hadiah2.visibility = View.GONE
-        }
-        if (monster < 5) {
-            hadiah3.visibility = View.GONE
-        }
+        // Hadiah 1 (monster < 4)
+        hadiah.visibility = if (monster < 4 || 1 in completedHadiah) View.GONE else View.VISIBLE
+
+        // Hadiah 2 (monster < 3)
+        hadiah2.visibility = if (monster < 3 || 2 in completedHadiah) View.GONE else View.VISIBLE
+
+        // Hadiah 3 (monster < 5)
+        hadiah3.visibility = if (monster < 5 || 3 in completedHadiah) View.GONE else View.VISIBLE
+
+        // Hadiah 4 (monster < 2)
+        hadiah4.visibility = if (monster < 2 || 4 in completedHadiah) View.GONE else View.VISIBLE
+
+        hadiah5.visibility = if (monster < 2 || 5 in completedHadiah) View.GONE else View.VISIBLE
 
         val forward = findViewById<ImageView>(R.id.forward)
         val backward = findViewById<ImageView>(R.id.backward)
@@ -131,6 +159,15 @@ class rute : AppCompatActivity() {
         backward.setOnTouchListener(touchListener)
         right.setOnTouchListener(touchListener)
         left.setOnTouchListener(touchListener)
+
+        home.setOnClickListener {
+            val intent = Intent(this, MainMenu::class.java)
+            intent.putExtra("lastX", lastPlayerX)
+            intent.putExtra("lastY", lastPlayerY)
+            intent.putExtra("monster", monster)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun movePlayer(direction: String) {
@@ -145,46 +182,50 @@ class rute : AppCompatActivity() {
             "backward" -> player.translationY + stepSize
             else -> player.translationY
         }
+
+        Log.d(TAG, "Moving player - Direction: $direction, NewX: $newX, NewY: $newY")
+
+        // Cek tabrakan dengan hadiah1
         val hadiah = findViewById<ImageView>(R.id.hadiah)
-
-        if (willCollideWithObject(hadiah, newX, newY)) {
-            isMoving = false
-            handler.removeCallbacks(moveRunnable)
-            val intent = Intent(this, GameDadu::class.java)
-            intent.putExtra("monster", monster)
-            startActivity(intent)
+        if (willCollideWithObject(hadiah, newX, newY) && hadiah.visibility == View.VISIBLE) {
+            handleHadiahCollision(newX, newY, 1, GameDadu::class.java)
             return
         }
 
+        // Cek tabrakan dengan hadiah2
         val hadiah2 = findViewById<ImageView>(R.id.hadiah2)
-
-        if (willCollideWithObject(hadiah2, newX, newY)) {
-            isMoving = false
-            handler.removeCallbacks(moveRunnable)
-            val intent = Intent(this, GameUang::class.java)
-            intent.putExtra("monster", monster)
-            startActivity(intent)
+        if (willCollideWithObject(hadiah2, newX, newY) && hadiah2.visibility == View.VISIBLE) {
+            handleHadiahCollision(newX, newY, 2, GameUang::class.java)
             return
         }
 
+        // Cek tabrakan dengan hadiah3
         val hadiah3 = findViewById<ImageView>(R.id.hadiah3)
+        if (willCollideWithObject(hadiah3, newX, newY) && hadiah3.visibility == View.VISIBLE) {
+            handleHadiahCollision(newX, newY, 3, GamePizza::class.java)
+            return
+        }
 
-        if (willCollideWithObject(hadiah3, newX, newY)) {
-            isMoving = false
-            handler.removeCallbacks(moveRunnable)
-            val intent = Intent(this, GamePizza::class.java)
-            intent.putExtra("monster", monster)
-            startActivity(intent)
+        // Cek tabrakan dengan hadiah4
+        val hadiah4 = findViewById<ImageView>(R.id.hadiah4)
+        if (willCollideWithObject(hadiah4, newX, newY) && hadiah4.visibility == View.VISIBLE) {
+            handleHadiahCollision(newX, newY, 4, GameBentuk::class.java)
+            return
+        }
+
+        val hadiah5 = findViewById<ImageView>(R.id.hadiah5)
+        if (willCollideWithObject(hadiah5, newX, newY) && hadiah5.visibility == View.VISIBLE) {
+            handleHadiahCollision(newX, newY, 5, GameNomor::class.java)
             return
         }
 
         val goa = findViewById<ImageView>(R.id.goa)
-
         if (willCollideWithObject(goa, newX, newY)) {
             isMoving = false
             handler.removeCallbacks(moveRunnable)
             val intent = Intent(this, HasilQuiz::class.java)
             intent.putExtra("monster", monster)
+            intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
             startActivity(intent)
             return
         }
@@ -195,8 +236,22 @@ class rute : AppCompatActivity() {
         } else {
             isMoving = false
             handler.removeCallbacks(moveRunnable)
-            Toast.makeText(this, "Tidak bisa bergerak ke arah tersebut!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun handleHadiahCollision(newX: Float, newY: Float, hadiahId: Int, gameClass: Class<*>) {
+        isMoving = false
+        handler.removeCallbacks(moveRunnable)
+        lastPlayerX = newX
+        lastPlayerY = newY
+
+        val intent = Intent(this, gameClass)
+        intent.putExtra("lastX", lastPlayerX)
+        intent.putExtra("lastY", lastPlayerY)
+        intent.putExtra("monster", monster)
+        intent.putExtra("currentHadiah", hadiahId)
+        intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
+        startActivity(intent)
     }
 
     private fun setupBoundaries() {
