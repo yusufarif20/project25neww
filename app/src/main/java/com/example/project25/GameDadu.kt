@@ -3,6 +3,7 @@ package com.example.project25
 import Question
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -66,6 +67,7 @@ class GameDadu : AppCompatActivity() {
     private var currentScore: Int = 0
     private var True: Int = 0
     private var False: Int = 0
+    private var star: Int = 0
     private var selectedAnswerIndex: Int? = null
     private var lastPlayerX = 0f
     private var lastPlayerY = 0f
@@ -93,6 +95,8 @@ class GameDadu : AppCompatActivity() {
         lastPlayerX = intent.getFloatExtra("lastX", 0f)
         lastPlayerY = intent.getFloatExtra("lastY", 0f)
         var monster = intent.getIntExtra("monster", 0)
+        star = intent.getIntExtra("star", 0)
+        Log.d("GameDadu", "Nilai star yang diterima: $star")
 
         // Ambil data hadiah
         currentHadiah = intent.getIntExtra("currentHadiah", 0)
@@ -142,8 +146,7 @@ class GameDadu : AppCompatActivity() {
             intent.putExtra("lastX", lastPlayerX)
             intent.putExtra("lastY", lastPlayerY)
             intent.putExtra("monster", monster)
-            intent.putExtra("True", True)
-            intent.putExtra("False", False)
+            intent.putExtra("star", star)
             intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
 
             startActivity(intent)
@@ -154,9 +157,11 @@ class GameDadu : AppCompatActivity() {
     }
 
     private fun checkAnswerAndUpdateScore() {
+        star = intent.getIntExtra("star", 0)
         selectedAnswerIndex?.let { selected ->
             val isCorrect = selected == questions[currentQuestionIndex].correctAnswerIndex
             if (isCorrect) {
+                star++
                 True += 1
                 currentScore += 20
             } else {

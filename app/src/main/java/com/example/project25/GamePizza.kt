@@ -22,7 +22,7 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
     private var viewValues = mutableMapOf<Int, Int>()
     private val maxObjects = 4
     private var isDraggable = true
-    private val targetValue = 3
+    private val targetValue = 4
     private var lastPlayerX = 0f
     private var lastPlayerY = 0f
 
@@ -48,6 +48,7 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
         lastPlayerX = intent.getFloatExtra("lastX", 0f)
         lastPlayerY = intent.getFloatExtra("lastY", 0f)
         var monster = intent.getIntExtra("monster", 0)
+        var star = intent.getIntExtra("star", 0)
 
         // Ambil data hadiah
         currentHadiah = intent.getIntExtra("currentHadiah", 0)
@@ -82,10 +83,11 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
                 val intent = Intent(this, rute::class.java)
                 monster -= 1
 
-                // Masukkan semua data yang diperlukan
                 intent.putExtra("lastX", lastPlayerX)
                 intent.putExtra("lastY", lastPlayerY)
                 intent.putExtra("monster", monster)
+                star++
+                intent.putExtra("star", star)
                 intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
 
                 startActivity(intent)

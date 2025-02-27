@@ -36,8 +36,8 @@
 
     <ImageView
         android:id="@+id/satu"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/nosatu"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,8 +49,8 @@
 
     <ImageView
         android:id="@+id/dua"
-        android:layout_width="62dp"
-        android:layout_height="60dp"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/nodua"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,8 +62,8 @@
 
     <ImageView
         android:id="@+id/tiga"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/notiga"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -75,8 +75,8 @@
 
     <ImageView
         android:id="@+id/empat"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/noempat"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -88,8 +88,8 @@
 
     <ImageView
         android:id="@+id/lima"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/nolima"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -101,8 +101,8 @@
 
     <ImageView
         android:id="@+id/tuju"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/notuju"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -114,8 +114,8 @@
 
     <ImageView
         android:id="@+id/enam"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:scaleType="centerCrop"
         android:src="@drawable/noenam"
         app:layout_constraintBottom_toBottomOf="parent"

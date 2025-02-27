@@ -9,107 +9,146 @@
     tools:context=".GameBuah">
 
     <ImageView
+        android:id="@+id/home"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnhome"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.099" />
+
+    <ImageView
         android:id="@+id/satu"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/nosatu"
+        android:src="@drawable/buahsemangka"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.342" />
+        app:layout_constraintVertical_bias="0.299" />
 
     <ImageView
         android:id="@+id/lima"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/nosatu"
+        android:src="@drawable/buahmanggis"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598" />
-
-    <ImageView
-        android:id="@+id/enam"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/nosatu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.273"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598" />
+        app:layout_constraintVertical_bias="0.568" />
 
     <ImageView
         android:id="@+id/tuju"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/nosatu"
+        android:src="@drawable/buahdurian"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.329"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598" />
+        app:layout_constraintVertical_bias="0.568" />
 
     <ImageView
         android:id="@+id/delapan"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/nosatu"
+        android:src="@drawable/buahkiwi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.403"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598" />
+        app:layout_constraintVertical_bias="0.568" />
 
     <ImageView
         android:id="@+id/tiga"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/nosatu"
+        android:src="@drawable/buahmangga"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.329"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.342" />
+        app:layout_constraintVertical_bias="0.299" />
 
     <ImageView
         android:id="@+id/empat"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/nosatu"
+        android:src="@drawable/buahjeruk"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.403"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.342" />
+        app:layout_constraintVertical_bias="0.299" />
+
+    <ImageView
+        android:id="@+id/kotak"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/kotakuang"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.696"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.48" />
+
+    <ImageView
+        android:id="@+id/enam"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/buahapel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.273"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.568" />
 
     <ImageView
         android:id="@+id/dua"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/nosatu"
+        android:src="@drawable/buahnanas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.342" />
+        app:layout_constraintVertical_bias="0.299" />
+
+    <ImageView
+        android:id="@+id/submit"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btnsubmit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.914" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

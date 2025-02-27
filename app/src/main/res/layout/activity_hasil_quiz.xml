@@ -47,16 +47,44 @@
         app:layout_constraintVertical_bias="0.096" />
 
     <TextView
-        android:id="@+id/scoreTextView"
         android:layout_width="146dp"
         android:layout_height="55dp"
         android:fontFamily="@font/bungee"
-        android:text="TextView"
+        android:text="Level"
         android:textColor="@color/black"
         android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/splashBackground"
-        app:layout_constraintHorizontal_bias="0.316"
+        app:layout_constraintHorizontal_bias="0.319"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.421" />
+
+    <TextView
+        android:layout_width="146dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/bungee"
+        android:text="Bintang"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/splashBackground"
+        app:layout_constraintHorizontal_bias="0.319"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.575" />
+
+    <TextView
+        android:id="@+id/scoreTextView"
+        android:layout_width="146dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/bungee"
+        android:text="1"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/splashBackground"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.421" />
@@ -87,7 +115,7 @@
         android:textSize="21sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/splashBackground"
-        app:layout_constraintHorizontal_bias="0.316"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.575" />
