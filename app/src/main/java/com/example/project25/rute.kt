@@ -14,8 +14,14 @@ import android.widget.Toast
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.LinearLayout
 import android.widget.TextView
-import kotlin.random.Random
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class rute : AppCompatActivity() {
     companion object {
@@ -27,20 +33,21 @@ class rute : AppCompatActivity() {
     private val walls = mutableListOf<ImageView>()
     private var monster: Int = 0
     private var star: Int = 0
+    private var hartaid: Int = 0
     private val handler = Handler(Looper.getMainLooper())
     private var isMoving = false
     private var currentDirection = ""
     private val moveDelay = 50L
     private var lastPlayerX = 0f
     private var lastPlayerY = 0f
+    private var lastRobotX = 0f
+    private var lastRobotY = 0f
     private var hasShownToast = false
     private var currentRotation = 0f
     private val robotHandler = Handler(Looper.getMainLooper())
     private val robotMoveDelay = 3000L // 3 detik
     private val robotStepSize = 10f
     private var isRobotMoving = false
-    private var targetX = 300f  // Ganti dengan koordinat X yang Anda inginkan
-    private var targetY = 200f  // Ganti dengan koordinat Y yang Anda inginkan
 
     private val robotMoveRunnable = object : Runnable {
         override fun run() {
@@ -72,6 +79,14 @@ class rute : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_rute)
+
+        val menuButton: ImageView = findViewById(R.id.menu)
+        val dropdownContainer: LinearLayout = findViewById(R.id.dropdownContainer)
+
+        menuButton.setOnClickListener {
+            dropdownContainer.visibility = if (dropdownContainer.visibility == View.GONE)
+                View.VISIBLE else View.GONE
+        }
 
         player = findViewById(R.id.player)
         robot = findViewById(R.id.robot)
@@ -123,14 +138,12 @@ class rute : AppCompatActivity() {
         walls.add(findViewById(R.id.goa))
         walls.add(findViewById(R.id.harta))
 
-        val bintang = findViewById<TextView>(R.id.bintang)
-
         lastPlayerX = intent.getFloatExtra("lastX", 0f)
         lastPlayerY = intent.getFloatExtra("lastY", 0f)
+        lastRobotX = intent.getFloatExtra("lastRobotX", 0f)
+        lastRobotY = intent.getFloatExtra("lastRobotY", 0f)
         monster = intent.getIntExtra("monster", 0)
-        star = intent.getIntExtra("star", 0)
         Log.d("GameDadu", "Nilai star yang diterima: $star")
-        bintang.text = star.toString()
 
         val completedString = intent.getStringExtra("completedHadiah") ?: ""
         if (completedString.isNotEmpty()) {
@@ -141,6 +154,8 @@ class rute : AppCompatActivity() {
 
         player.translationX = lastPlayerX
         player.translationY = lastPlayerY
+        robot.translationX = lastRobotX
+        robot.translationY = lastRobotY
 
         val hadiah = findViewById<ImageView>(R.id.hadiah)
         val hadiah2 = findViewById<ImageView>(R.id.hadiah2)
@@ -149,16 +164,12 @@ class rute : AppCompatActivity() {
         val hadiah5 = findViewById<ImageView>(R.id.hadiah5)
         val hadiah6 = findViewById<ImageView>(R.id.hadiah6)
 
-        // Hadiah 1 (monster < 4)
         hadiah.visibility = if (monster < 4 || 1 in completedHadiah) View.GONE else View.VISIBLE
 
-        // Hadiah 2 (monster < 3)
         hadiah2.visibility = if (monster < 3 || 2 in completedHadiah) View.GONE else View.VISIBLE
 
-        // Hadiah 3 (monster < 5)
         hadiah3.visibility = if (monster < 5 || 3 in completedHadiah) View.GONE else View.VISIBLE
 
-        // Hadiah 4 (monster < 2)
         hadiah4.visibility = if (monster < 2 || 4 in completedHadiah) View.GONE else View.VISIBLE
 
         hadiah5.visibility = if (monster < 2 || 5 in completedHadiah) View.GONE else View.VISIBLE
@@ -179,18 +190,22 @@ class rute : AppCompatActivity() {
                     currentDirection = when (view.id) {
                         R.id.forward -> {
                             rotatePlayer(180f)
+                            rotateRobot(180f)
                             "forward"
                         }
                         R.id.backward -> {
                             rotatePlayer(0f)
+                            rotateRobot(0f)
                             "backward"
                         }
                         R.id.right -> {
                             rotatePlayer(-90f)
+                            rotateRobot(-90f)
                             "right"
                         }
                         R.id.left -> {
                             rotatePlayer(90f)
+                            rotateRobot(90f)
                             "left"
                         }
                         else -> ""
@@ -212,6 +227,8 @@ class rute : AppCompatActivity() {
         right.setOnTouchListener(touchListener)
         left.setOnTouchListener(touchListener)
 
+        listenUserStars()
+
         home.setOnClickListener {
             val intent = Intent(this, MainMenu::class.java)
             intent.putExtra("lastX", lastPlayerX)
@@ -220,6 +237,35 @@ class rute : AppCompatActivity() {
             intent.putExtra("star", star)
             startActivity(intent)
             finish()
+        }
+    }
+
+    private fun listenUserStars() {
+        val auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        val bintang = findViewById<TextView>(R.id.bintang)
+
+        if (user != null) {
+            val uid = user.uid
+            val database: DatabaseReference = FirebaseDatabase.getInstance().reference
+            val starsRef = database.child("users").child(uid).child("stars")
+
+            starsRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val stars = snapshot.getValue(Int::class.java) ?: 0
+                    Log.d("Get Stars", "Done + Stars didapat $stars")
+                    star = stars
+                    bintang.text = stars.toString()
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.d("Get Stars", "Failed")
+                    println("Gagal membaca stars: ${error.message}")
+                }
+            })
+        } else {
+            Log.d("Get Stars", "Done")
+            println("User belum login")
         }
     }
 
@@ -234,6 +280,19 @@ class rute : AppCompatActivity() {
 
         // Log untuk debugging
         Log.d(TAG, "Player rotated to: $angle degrees")
+    }
+
+    private fun rotateRobot(angle: Float) {
+        // Menggunakan animasi untuk rotasi agar lebih smooth
+        val rotationAnimator = ObjectAnimator.ofFloat(robot, "rotation", angle)
+        rotationAnimator.duration = 300 // Durasi animasi dalam milidetik
+        rotationAnimator.start()
+
+        // Simpan sudut rotasi untuk digunakan nanti jika diperlukan
+        currentRotation = angle
+
+        // Log untuk debugging
+        Log.d(TAG, "Robot rotated to: $angle degrees")
     }
 
     private fun movePlayer(direction: String) {
@@ -291,23 +350,26 @@ class rute : AppCompatActivity() {
         val harta= findViewById<ImageView>(R.id.harta)
         val bintang = findViewById<TextView>(R.id.bintang)
         if (willCollideWithObject(harta, newX, newY)) {
-            if (star >= 6 && star < 8) {
-                walls.remove(harta)
-                harta.visibility = View.GONE
-                star += 3
-                bintang.text = star.toString()
-                isMoving = false
-                handler.removeCallbacks(moveRunnable)
-                hasShownToast = false // Reset toast agar bisa muncul lagi jika perlu
-            } else if (star == 9) {
-                Toast.makeText(this, "Anda sudah mengambil harta karun", Toast.LENGTH_LONG).show()
-            } else {
-                if (!hasShownToast) {  // Pastikan toast hanya muncul sekali
-                    Toast.makeText(this, "Bintang anda belum cukup untuk membuka kotak harta karun", Toast.LENGTH_LONG).show()
-                    hasShownToast = true // Set agar tidak muncul lagi
+                if (hartaid == 0) { 
+                    if (star >= 6) {
+                        walls.remove(harta)
+                        harta.visibility = View.GONE
+                        hartaid++ // Tambahkan hartaid agar player tidak bisa mengambil lagi
+                        star += 3
+                        bintang.text = star.toString()
+                        isMoving = false
+                        handler.removeCallbacks(moveRunnable)
+                        hasShownToast = false // Reset agar toast bisa muncul lagi jika perlu
+                    } else {
+                        if (!hasShownToast) {  // Pastikan toast hanya muncul sekali
+                            Toast.makeText(this, "Bintang anda belum cukup untuk membuka kotak harta karun", Toast.LENGTH_LONG).show()
+                            hasShownToast = true // Set agar tidak muncul lagi
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "Anda sudah mengambil harta karun", Toast.LENGTH_LONG).show()
                 }
-            }
-            return
+                return
         }
 
 
@@ -315,14 +377,13 @@ class rute : AppCompatActivity() {
         if (willCollideWithObject(goa, newX, newY)) {
             isMoving = false
             handler.removeCallbacks(moveRunnable)
-            val intent = Intent(this, HasilQuiz::class.java)
+            val intent = Intent(this, GameGelud::class.java)
             intent.putExtra("monster", monster)
             intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
             intent.putExtra("star", star)
             startActivity(intent)
             return
         }
-
         if (isValidPosition(newX, newY) && !willCollideWithAnyWall(newX, newY)) {
             player.translationX = newX
             player.translationY = newY
@@ -337,8 +398,12 @@ class rute : AppCompatActivity() {
         handler.removeCallbacks(moveRunnable)
         lastPlayerX = newX
         lastPlayerY = newY
+        lastRobotX = robot.translationX
+        lastRobotY = robot.translationY
 
         val intent = Intent(this, gameClass)
+        intent.putExtra("lastRobotX", lastRobotX)
+        intent.putExtra("lastRobotY", lastRobotY)
         intent.putExtra("lastX", lastPlayerX)
         intent.putExtra("lastY", lastPlayerY)
         intent.putExtra("monster", monster)
@@ -396,11 +461,24 @@ class rute : AppCompatActivity() {
     }
 
     private fun moveRobot() {
-        // Gunakan posisi player sebagai target
-        val targetX = player.translationX
-        val targetY = player.translationY
+        // Gunakan posisi player sebagai target dasar
+        val playerX = player.translationX
+        val playerY = player.translationY
 
-        // Hitung arah pergerakan berdasarkan posisi saat ini dan target (posisi player)
+        // Hitung arah pergerakan berdasarkan posisi terakhir pemain
+        val offset = 50f // Jarak mendahului
+        val targetX = when (currentDirection) {
+            "right" -> playerX + offset
+            "left" -> playerX - offset
+            else -> playerX
+        }
+
+        val targetY = when (currentDirection) {
+            "forward" -> playerY - offset
+            "backward" -> playerY + offset
+            else -> playerY
+        }
+
         val currentX = robot.translationX
         val currentY = robot.translationY
 
@@ -411,19 +489,16 @@ class rute : AppCompatActivity() {
         // Hitung jarak total
         val totalDistance = Math.sqrt((distanceX * distanceX + distanceY * distanceY).toDouble())
 
-        // Jika robot sudah dekat dengan player, periksa tabrakan
-        if (totalDistance <= robotStepSize * 2) {
-            checkPlayerRobotCollision()
-            return
-        }
+        // Jika robot sudah cukup dekat ke target, tidak perlu bergerak lebih jauh
+        if (totalDistance <= robotStepSize * 2) return
 
         // Normalisasi vektor arah
         val dirX = distanceX / totalDistance.toFloat()
         val dirY = distanceY / totalDistance.toFloat()
 
-        // Hitung posisi baru
-        val newX = currentX + dirX * robotStepSize
-        val newY = currentY + dirY * robotStepSize
+        // Hitung posisi baru dengan percepatan (robot lebih cepat)
+        val newX = currentX + dirX * (robotStepSize * 1.5f)
+        val newY = currentY + dirY * (robotStepSize * 1.5f)
 
         // Periksa tabrakan dengan dinding sebelum bergerak
         if (!willCollideWithAnyWall(newX, newY)) {
@@ -436,12 +511,9 @@ class rute : AppCompatActivity() {
             } else if (!willCollideWithAnyWall(currentX, newY)) {
                 robot.translationY = newY
             }
-            // Jika kedua cara tidak bisa, robot akan diam untuk sementara
         }
-
-        // Cek tabrakan dengan pemain
-        checkPlayerRobotCollision()
     }
+
 
     private fun checkPlayerRobotCollision() {
         val robotBounds = Rect()
@@ -449,14 +521,5 @@ class rute : AppCompatActivity() {
 
         val playerBounds = Rect()
         player.getGlobalVisibleRect(playerBounds)
-
-        if (Rect.intersects(robotBounds, playerBounds)) {
-            // Robot menangkap pemain, tambahkan penanganan sesuai gameplay Anda
-            Toast.makeText(this, "Robot menangkap Anda!", Toast.LENGTH_SHORT).show()
-
-            // Contoh: Reset posisi pemain atau kirim ke layar "Game Over"
-            // resetPlayerPosition() atau
-            // navigateToGameOver()
-        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.project25
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.*
 
 class LeaderboardActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var leaderboardAdapter: LeaderboardAdapter
+    private val leaderboardList = mutableListOf<LeaderboardItem>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,20 +38,41 @@ class LeaderboardActivity : AppCompatActivity() {
         }
 
         // Setup RecyclerView
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewLeaderboard)
+        recyclerView = findViewById(R.id.recyclerViewLeaderboard)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        leaderboardAdapter = LeaderboardAdapter(leaderboardList)
+        recyclerView.adapter = leaderboardAdapter
 
-        // Create dummy data
-        val dummyData = listOf(
-            LeaderboardItem("Budi", 95),
-            LeaderboardItem("Ani", 90),
-            LeaderboardItem("Tono", 85)
-        )
+        // Ambil data dari Firebase
+        loadLeaderboardData()
+    }
 
-        // Set adapter with dummy data
-        recyclerView.adapter = LeaderboardAdapter(dummyData)
+    private fun loadLeaderboardData() {
+        val database = FirebaseDatabase.getInstance()
+        val usersRef = database.getReference("users")
+
+        usersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                leaderboardList.clear() // Hapus data lama
+
+                for (userSnapshot in snapshot.children) {
+                    val name = userSnapshot.child("name").getValue(String::class.java) ?: "Unknown"
+                    val star = userSnapshot.child("star").getValue(Int::class.java) ?: 0
+                    leaderboardList.add(LeaderboardItem(name, star))
+                }
+
+                // Urutkan berdasarkan skor tertinggi
+                leaderboardList.sortByDescending { it.score }
+                leaderboardAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Gagal mengambil data leaderboard", error.toException())
+            }
+        })
     }
 }
+
 
 // Data class for leaderboard items
 data class LeaderboardItem(
@@ -52,7 +80,6 @@ data class LeaderboardItem(
     val score: Int
 )
 
-// Adapter class
 class LeaderboardAdapter(private val items: List<LeaderboardItem>) :
     RecyclerView.Adapter<LeaderboardAdapter.ViewHolder>() {
 

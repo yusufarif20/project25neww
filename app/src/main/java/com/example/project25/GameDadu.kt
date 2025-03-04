@@ -7,7 +7,11 @@ import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class GameDadu : AppCompatActivity() {
     // Previous properties remain the same
@@ -71,11 +75,14 @@ class GameDadu : AppCompatActivity() {
     private var selectedAnswerIndex: Int? = null
     private var lastPlayerX = 0f
     private var lastPlayerY = 0f
+    private var lastRobotX = 0f
+    private var lastRobotY = 0f
 
     // Tambahan untuk sistem hadiah
     private var currentHadiah = 0
     private var completedHadiah = mutableSetOf<Int>()
 
+    private lateinit var auth: FirebaseAuth
     private lateinit var questionBackground: ImageView
     private lateinit var answerImageViews: List<ImageView>
     private lateinit var framesWithBorders: List<Pair<FrameLayout, ImageView>>
@@ -94,6 +101,8 @@ class GameDadu : AppCompatActivity() {
         // Get data from intent
         lastPlayerX = intent.getFloatExtra("lastX", 0f)
         lastPlayerY = intent.getFloatExtra("lastY", 0f)
+        lastRobotX = intent.getFloatExtra("lastRobotX", 0f)
+        lastRobotY = intent.getFloatExtra("lastRobotY", 0f)
         var monster = intent.getIntExtra("monster", 0)
         star = intent.getIntExtra("star", 0)
         Log.d("GameDadu", "Nilai star yang diterima: $star")
@@ -145,15 +154,46 @@ class GameDadu : AppCompatActivity() {
             // Add all necessary data to intent
             intent.putExtra("lastX", lastPlayerX)
             intent.putExtra("lastY", lastPlayerY)
+            intent.putExtra("lastRobotX", lastRobotX)
+            intent.putExtra("lastRobotY", lastRobotY)
             intent.putExtra("monster", monster)
             intent.putExtra("star", star)
             intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
 
             startActivity(intent)
             finish()
+
         }
 
         loadQuestion(currentQuestionIndex)
+    }
+
+    private fun addStarsValue() {
+        val auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+
+        if (user != null) {
+            val uid = user.uid
+            val database: DatabaseReference = FirebaseDatabase.getInstance().reference
+
+            val userRef = database.child("users").child(uid).child("stars")
+
+            userRef.get().addOnSuccessListener { snapshot ->
+                val currentStars = snapshot.getValue(Int::class.java) ?: 0
+                userRef.setValue(currentStars + 1)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Berhasil Klaim poin", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        println("Gagal menambahkan stars: ${e.message}")
+                    }
+            }.addOnFailureListener { e ->
+                println("Gagal mengambil data stars: ${e.message}")
+            }
+        } else {
+            println("User belum login")
+        }
+
     }
 
     private fun checkAnswerAndUpdateScore() {
@@ -164,6 +204,7 @@ class GameDadu : AppCompatActivity() {
                 star++
                 True += 1
                 currentScore += 20
+                addStarsValue()
             } else {
                 False += 1
             }

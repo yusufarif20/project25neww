@@ -504,10 +504,10 @@
         android:layout_width="34dp"
         android:layout_height="36dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/player"
+        android:src="@drawable/virtualcharacter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.173" />
@@ -564,18 +564,70 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.93" />
 
+    <!-- Container untuk item dropdown -->
+
     <ImageView
-        android:id="@+id/home"
+        android:id="@+id/menu"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Menu"
         android:scaleType="centerCrop"
-        android:src="@drawable/btnhome"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.019"
+        android:src="@drawable/btnmenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Container untuk item dropdown -->
+    <LinearLayout
+        android:id="@+id/dropdownContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/menu"
+        app:layout_constraintStart_toStartOf="@id/menu">
+
+        <ImageView
+            android:id="@+id/home"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="Home"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btnhome" />
+
+        <!-- Tombol Profile -->
+        <ImageView
+            android:id="@+id/profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="Profile"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btnprofile" />
+
+        <!-- Tombol Help -->
+        <ImageView
+            android:id="@+id/help"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="Help"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btnhelp" />
+
+        <!-- Tombol About -->
+        <ImageView
+            android:id="@+id/about"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="About"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btnabout" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/fl_star"
@@ -622,5 +674,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.93" />
+
+    <ImageView
+        android:id="@+id/backgrounddesain"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/layerdesain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.386"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.386" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

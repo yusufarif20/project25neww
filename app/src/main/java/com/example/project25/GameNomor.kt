@@ -10,6 +10,9 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import android.graphics.Rect
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class GameNomor : AppCompatActivity(), View.OnTouchListener {
     private var dX = 0f
@@ -24,6 +27,8 @@ class GameNomor : AppCompatActivity(), View.OnTouchListener {
     private val targetValue = 3
     private var lastPlayerX = 0f
     private var lastPlayerY = 0f
+    private var lastRobotX = 0f
+    private var lastRobotY = 0f
 
     // Tambahan untuk sistem hadiah
     private var currentHadiah = 0
@@ -47,7 +52,9 @@ class GameNomor : AppCompatActivity(), View.OnTouchListener {
         // Ambil data dari intent
         lastPlayerX = intent.getFloatExtra("lastX", 0f)
         lastPlayerY = intent.getFloatExtra("lastY", 0f)
-        var monster = intent.getIntExtra("monster", 0)
+        lastRobotX = intent.getFloatExtra("lastRobotX", 0f)
+        lastRobotY = intent.getFloatExtra("lastRobotY", 0f)
+        val monster = intent.getIntExtra("monster", 0)
         var star = intent.getIntExtra("star", 0)
 
         // Ambil data hadiah
@@ -82,13 +89,18 @@ class GameNomor : AppCompatActivity(), View.OnTouchListener {
                 // Tambahkan hadiah yang baru diselesaikan
                 completedHadiah.add(currentHadiah)
 
+                star++
+
+                addStarsValue()
+
                 val intent = Intent(this, rute::class.java)
 
                 // Masukkan semua data yang diperlukan
                 intent.putExtra("monster", monster)
                 intent.putExtra("lastX", lastPlayerX)
                 intent.putExtra("lastY", lastPlayerY)
-                star++
+                intent.putExtra("lastRobotX", lastRobotX)
+                intent.putExtra("lastRobotY", lastRobotY)
                 intent.putExtra("star", star)
                 intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
 
@@ -102,6 +114,34 @@ class GameNomor : AppCompatActivity(), View.OnTouchListener {
                 ).show()
             }
         }
+    }
+
+    private fun addStarsValue() {
+        val auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+
+        if (user != null) {
+            val uid = user.uid
+            val database: DatabaseReference = FirebaseDatabase.getInstance().reference
+
+            val userRef = database.child("users").child(uid).child("stars")
+
+            userRef.get().addOnSuccessListener { snapshot ->
+                val currentStars = snapshot.getValue(Int::class.java) ?: 0
+                userRef.setValue(currentStars + 1)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Berhasil Klaim poin", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        println("Gagal menambahkan stars: ${e.message}")
+                    }
+            }.addOnFailureListener { e ->
+                println("Gagal mengambil data stars: ${e.message}")
+            }
+        } else {
+            println("User belum login")
+        }
+
     }
 
     override fun onTouch(view: View, event: MotionEvent): Boolean {
