@@ -9,19 +9,6 @@
     tools:context=".GameBentuk">
 
     <ImageView
-        android:id="@+id/home"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/btnhome"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
-
-    <ImageView
         android:id="@+id/kotak"
         android:layout_width="60dp"
         android:layout_height="66dp"

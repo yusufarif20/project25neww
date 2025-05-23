@@ -8,12 +8,17 @@ import androidx.appcompat.app.AppCompatActivity
 
 class HasilQuiz : AppCompatActivity() {
 
+    private var game_mode = 0
+    var monster : Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hasil_quiz)
 
-        // Ambil data dari Intent
+        monster = intent.getIntExtra("monster", 0)
+        game_mode = intent.getIntExtra("game_mode", 0)
         var star = intent.getIntExtra("star", 0)
+        game_mode = 2
 
         // Ambil referensi ke TextView
         val resultTextView = findViewById<TextView>(R.id.TextView)
@@ -33,7 +38,9 @@ class HasilQuiz : AppCompatActivity() {
         trueTextView.text = "$star"
 
         submit.setOnClickListener {
-            val intent = Intent(this, Login::class.java)
+            val intent = Intent(this, rute::class.java)
+            intent.putExtra("game_mode", game_mode)
+            intent.putExtra("monster", monster)
             startActivity(intent)
             finish()
         }

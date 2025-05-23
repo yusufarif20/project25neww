@@ -55,6 +55,7 @@ class GameBentuk : AppCompatActivity(), View.OnTouchListener {
         lastRobotY = intent.getFloatExtra("lastRobotY", 0f)
         var monster = intent.getIntExtra("monster", 0)
         var star = intent.getIntExtra("star", 0)
+        var game_mode = intent.getIntExtra("monster", 0)
 
         // Ambil data hadiah
         currentHadiah = intent.getIntExtra("currentHadiah", 0)
@@ -99,6 +100,7 @@ class GameBentuk : AppCompatActivity(), View.OnTouchListener {
                 intent.putExtra("lastY", lastPlayerY)
                 intent.putExtra("lastRobotX", lastRobotX)
                 intent.putExtra("lastRobotY", lastRobotY)
+                intent.putExtra("game_mode", game_mode)
                 intent.putExtra("star", star)
                 intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
 

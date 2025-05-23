@@ -55,6 +55,7 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
         lastRobotX = intent.getFloatExtra("lastRobotX", 0f)
         lastRobotY = intent.getFloatExtra("lastRobotY", 0f)
         var monster = intent.getIntExtra("monster", 0)
+        var game_mode = intent.getIntExtra("game_mode", 0)
         var star = intent.getIntExtra("star", 0)
 
         // Ambil data hadiah
@@ -100,6 +101,7 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
                 intent.putExtra("lastRobotY", lastRobotY)
                 intent.putExtra("monster", monster)
                 intent.putExtra("star", star)
+                intent.putExtra("game_mode", game_mode)
                 intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
 
                 startActivity(intent)

@@ -60,6 +60,7 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
         lastRobotY = intent.getFloatExtra("lastRobotY", 0f)
         var monster = intent.getIntExtra("monster", 0)
         var star = intent.getIntExtra("star", 0)
+        var game_mode = intent.getIntExtra("game_mode", 0)
 
         // Ambil data hadiah
         currentHadiah = intent.getIntExtra("currentHadiah", 0)
@@ -112,6 +113,7 @@ class GameUang : AppCompatActivity(), View.OnTouchListener {
                 intent.putExtra("lastRobotY", lastRobotY)
                 intent.putExtra("monster", monster)
                 intent.putExtra("star", star)
+                intent.putExtra("game_mode", game_mode)
                 intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
 
                 startActivity(intent)

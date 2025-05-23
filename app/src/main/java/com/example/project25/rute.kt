@@ -25,13 +25,14 @@ import com.google.firebase.database.ValueEventListener
 
 class rute : AppCompatActivity() {
     companion object {
-        private const val TAG = "RuteGame"
+        const val TAG = "RuteGame"
     }
     private lateinit var player: ImageView
     private lateinit var robot: ImageView
     private val stepSize = 10f
     private val walls = mutableListOf<ImageView>()
     private var monster: Int = 0
+    private var game_mode: Int = 0
     private var star: Int = 0
     private var hartaid: Int = 0
     private val handler = Handler(Looper.getMainLooper())
@@ -78,7 +79,13 @@ class rute : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_rute)
+        game_mode = intent.getIntExtra("game_mode", 1)
+
+        if (game_mode == 1) {
+            setContentView(R.layout.activity_rute)
+        } else {
+            setContentView(R.layout.activity_rute2)
+        }
 
         val menuButton: ImageView = findViewById(R.id.menu)
         val dropdownContainer: LinearLayout = findViewById(R.id.dropdownContainer)
@@ -96,7 +103,6 @@ class rute : AppCompatActivity() {
             isRobotMoving = true
             robotMoveRunnable.run()
         }, robotMoveDelay)
-
 
         // Tambahkan semua tembok ke dalam list
         walls.add(findViewById(R.id.tempat))
@@ -408,6 +414,7 @@ class rute : AppCompatActivity() {
         intent.putExtra("lastY", lastPlayerY)
         intent.putExtra("monster", monster)
         intent.putExtra("star", star)
+        intent.putExtra("game_mode", game_mode)
         intent.putExtra("currentHadiah", hadiahId)
         intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
         startActivity(intent)

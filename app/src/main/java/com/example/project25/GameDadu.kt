@@ -104,6 +104,7 @@ class GameDadu : AppCompatActivity() {
         lastRobotX = intent.getFloatExtra("lastRobotX", 0f)
         lastRobotY = intent.getFloatExtra("lastRobotY", 0f)
         var monster = intent.getIntExtra("monster", 0)
+        var game_mode = intent.getIntExtra("game_mode", 0)
         star = intent.getIntExtra("star", 0)
         Log.d("GameDadu", "Nilai star yang diterima: $star")
 
@@ -158,6 +159,7 @@ class GameDadu : AppCompatActivity() {
             intent.putExtra("lastRobotY", lastRobotY)
             intent.putExtra("monster", monster)
             intent.putExtra("star", star)
+            intent.putExtra("game_mode", game_mode)
             intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
 
             startActivity(intent)
