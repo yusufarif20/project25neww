@@ -24,11 +24,21 @@ class GameBuah : AppCompatActivity(), View.OnTouchListener {
     private var viewValues = mutableMapOf<Int, Int>()
     private val maxObjects = 1
     private var isDraggable = true
-    private val targetValue = 4
+    private var targetValue = 4
     private var lastPlayerX = 0f
     private var lastPlayerY = 0f
     private var lastRobotX = 0f
     private var lastRobotY = 0f
+    private val backgroundList = listOf(
+        R.drawable.backgroundbuah,  // default
+        R.drawable.backgroundbuahdua,
+        R.drawable.backgroundbuahtiga,
+        R.drawable.backgroundbuahempat,
+        R.drawable.backgroundbuahlima
+    )
+    private val targetValues = listOf(
+        4, 5, 6, 7, 8
+    )
 
     // Tambahan untuk sistem hadiah
     private var currentHadiah = 0
@@ -36,8 +46,16 @@ class GameBuah : AppCompatActivity(), View.OnTouchListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val randomIndex = (backgroundList.indices).random()
+        val selectedBackground = backgroundList[randomIndex]
+        val selectedTargetValue = targetValues[randomIndex]
+
         enableEdgeToEdge()
         setContentView(R.layout.activity_game_buah)
+
+        findViewById<View>(R.id.main).setBackgroundResource(selectedBackground)
+        targetValue = selectedTargetValue
 
         val satu = findViewById<ImageView>(R.id.satu)
         val dua = findViewById<ImageView>(R.id.dua)

@@ -13,6 +13,7 @@ import android.graphics.Rect
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlin.random.Random
 
 class GameNomor : AppCompatActivity(), View.OnTouchListener {
     private var dX = 0f
@@ -20,11 +21,18 @@ class GameNomor : AppCompatActivity(), View.OnTouchListener {
     private var counter = 0
     private lateinit var keranjang: ImageView
     private lateinit var submitButton: ImageView
+    private lateinit var soal1: ImageView
+    private lateinit var soal2: ImageView
     private var droppedViews = mutableSetOf<ImageView>()
     private var viewValues = mutableMapOf<Int, Int>()
     private val maxObjects = 1
     private var isDraggable = true
-    private val targetValue = 3
+
+    // Variabel untuk soal acak
+    private var targetValue = 3
+    private var angka1 = 1
+    private var angka2 = 2
+
     private var lastPlayerX = 0f
     private var lastPlayerY = 0f
     private var lastRobotX = 0f
@@ -33,6 +41,17 @@ class GameNomor : AppCompatActivity(), View.OnTouchListener {
     // Tambahan untuk sistem hadiah
     private var currentHadiah = 0
     private var completedHadiah = mutableSetOf<Int>()
+
+    // Array drawable untuk angka
+    private val numberDrawables = mapOf(
+        1 to R.drawable.nosatu,
+        2 to R.drawable.nodua,
+        3 to R.drawable.notiga,
+        4 to R.drawable.noempat,
+        5 to R.drawable.nolima,
+        6 to R.drawable.noenam,
+        7 to R.drawable.notuju
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +67,11 @@ class GameNomor : AppCompatActivity(), View.OnTouchListener {
         val tuju = findViewById<ImageView>(R.id.tuju)
         keranjang = findViewById(R.id.kotak)
         submitButton = findViewById(R.id.submit)
+        soal1 = findViewById(R.id.soal1)
+        soal2 = findViewById(R.id.soal2)
+
+        // Generate soal acak
+        generateRandomQuestion()
 
         // Ambil data dari intent
         lastPlayerX = intent.getFloatExtra("lastX", 0f)
@@ -111,11 +135,33 @@ class GameNomor : AppCompatActivity(), View.OnTouchListener {
             } else {
                 Toast.makeText(
                     this,
-                    "Jawaban salah!",
-                    Toast.LENGTH_SHORT
+                    "Jawaban salah! Hasil penjumlahan $angka1 + $angka2 = $targetValue",
+                    Toast.LENGTH_LONG
                 ).show()
             }
         }
+    }
+
+    private fun generateRandomQuestion() {
+        // Generate dua angka acak antara 1-7
+        angka1 = Random.nextInt(1, 8) // 1-7
+        angka2 = Random.nextInt(1, 8) // 1-7
+
+        // Pastikan hasil penjumlahan tidak melebihi 7 (karena hanya ada angka 1-7)
+        while (angka1 + angka2 > 7) {
+            angka1 = Random.nextInt(1, 8)
+            angka2 = Random.nextInt(1, 8)
+        }
+
+        // Hitung target jawaban
+        targetValue = angka1 + angka2
+
+        // Set drawable untuk soal1 dan soal2
+        numberDrawables[angka1]?.let { soal1.setImageResource(it) }
+        numberDrawables[angka2]?.let { soal2.setImageResource(it) }
+
+        // Log untuk debugging
+        println("Soal: $angka1 + $angka2 = $targetValue")
     }
 
     private fun addStarsValue() {

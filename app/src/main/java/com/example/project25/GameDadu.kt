@@ -15,58 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class GameDadu : AppCompatActivity() {
     // Previous properties remain the same
-    private val questions = listOf(
-        Question(
-            backgroundImage = R.drawable.layoutdadu,
-            answers = listOf(
-                R.drawable.dadutiga,
-                R.drawable.dadusatu,
-                R.drawable.daduempat,
-                R.drawable.daduenam
-            ),
-            correctAnswerIndex = 2
-        ),
-        Question(
-            backgroundImage = R.drawable.layoutdadudua,
-            answers = listOf(
-                R.drawable.dadulima,
-                R.drawable.dadusatu,
-                R.drawable.dadudua,
-                R.drawable.daduempat
-            ),
-            correctAnswerIndex = 1
-        ),
-        Question(
-            backgroundImage = R.drawable.layoutdadutiga,
-            answers = listOf(
-                R.drawable.dadulima,
-                R.drawable.dadutiga,
-                R.drawable.dadusatu,
-                R.drawable.dadudua
-            ),
-            correctAnswerIndex = 0
-        ),
-        Question(
-            backgroundImage = R.drawable.layoutdaduempat,
-            answers = listOf(
-                R.drawable.dadutiga,
-                R.drawable.daduempat,
-                R.drawable.dadudua,
-                R.drawable.dadusatu
-            ),
-            correctAnswerIndex = 0
-        ),
-        Question(
-            backgroundImage = R.drawable.layoutdadulima,
-            answers = listOf(
-                R.drawable.dadutiga,
-                R.drawable.dadudua,
-                R.drawable.daduenam,
-                R.drawable.daduempat
-            ),
-            correctAnswerIndex = 1
-        )
-    )
+    private lateinit var questions: List<Question>
     private var currentQuestionIndex = 0
     private var currentScore: Int = 0
     private var True: Int = 0
@@ -92,6 +41,59 @@ class GameDadu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_dadu)
+
+        questions = listOf(
+            Question(
+                backgroundImage = R.drawable.layoutdadu,
+                answers = listOf(
+                    R.drawable.dadutiga,
+                    R.drawable.dadusatu,
+                    R.drawable.daduempat,
+                    R.drawable.daduenam
+                ),
+                correctAnswerIndex = 2
+            ),
+            Question(
+                backgroundImage = R.drawable.layoutdadudua,
+                answers = listOf(
+                    R.drawable.dadulima,
+                    R.drawable.dadusatu,
+                    R.drawable.dadudua,
+                    R.drawable.daduempat
+                ),
+                correctAnswerIndex = 1
+            ),
+            Question(
+                backgroundImage = R.drawable.layoutdadutiga,
+                answers = listOf(
+                    R.drawable.dadulima,
+                    R.drawable.dadutiga,
+                    R.drawable.dadusatu,
+                    R.drawable.dadudua
+                ),
+                correctAnswerIndex = 0
+            ),
+            Question(
+                backgroundImage = R.drawable.layoutdaduempat,
+                answers = listOf(
+                    R.drawable.dadutiga,
+                    R.drawable.daduempat,
+                    R.drawable.dadudua,
+                    R.drawable.dadusatu
+                ),
+                correctAnswerIndex = 0
+            ),
+            Question(
+                backgroundImage = R.drawable.layoutdadulima,
+                answers = listOf(
+                    R.drawable.dadutiga,
+                    R.drawable.dadudua,
+                    R.drawable.daduenam,
+                    R.drawable.daduempat
+                ),
+                correctAnswerIndex = 1
+            )
+        ).shuffled()
 
         // Initialize views
         questionBackground = findViewById(R.id.splashBackground)

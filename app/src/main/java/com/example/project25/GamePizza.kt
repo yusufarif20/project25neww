@@ -13,6 +13,7 @@ import android.graphics.Rect
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlin.random.Random
 
 class GamePizza : AppCompatActivity(), View.OnTouchListener {
     private var dX = 0f
@@ -21,11 +22,19 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
     private lateinit var textView: TextView
     private lateinit var keranjang: ImageView
     private lateinit var submitButton: ImageView
+    private lateinit var pizzaSoal1: ImageView
+    private lateinit var pizzaSoal2: ImageView
+    private lateinit var soalText: TextView
     private var droppedViews = mutableSetOf<ImageView>()
     private var viewValues = mutableMapOf<Int, Int>()
     private val maxObjects = 4
     private var isDraggable = true
-    private val targetValue = 4
+
+    // Variabel untuk soal acak
+    private var targetValue = 4
+    private var pecahan1 = 1
+    private var pecahan2 = 3
+
     private var lastPlayerX = 0f
     private var lastPlayerY = 0f
     private var lastRobotX = 0f
@@ -34,6 +43,17 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
     // Tambahan untuk sistem hadiah
     private var currentHadiah = 0
     private var completedHadiah = mutableSetOf<Int>()
+
+    // Array drawable untuk berbagai pecahan pizza
+    private val pizzaDrawables = mapOf(
+        1 to R.drawable.pizzasoal,      // 1/4 pizza
+        2 to R.drawable.pizzasoaldua,   // 2/4 pizza
+        3 to R.drawable.pizza1,
+        4 to R.drawable.pizza2,
+        5 to R.drawable.pizza3,
+        6 to R.drawable.pizza4,
+        // Tambahkan drawable lain sesuai kebutuhan
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +68,12 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
         val pizza4 = findViewById<ImageView>(R.id.pizza4)
         keranjang = findViewById(R.id.keranjang)
         submitButton = findViewById(R.id.submit)
+        pizzaSoal1 = findViewById(R.id.pizzasoal)
+        pizzaSoal2 = findViewById(R.id.pizzasoal2)
+        soalText = findViewById(R.id.soaltext)
+
+        // Generate soal acak
+        generateRandomPizzaQuestion()
 
         // Ambil data dari intent
         lastPlayerX = intent.getFloatExtra("lastX", 0f)
@@ -109,11 +135,46 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
             } else {
                 Toast.makeText(
                     this,
-                    "Pecahan Belum Benar",
-                    Toast.LENGTH_SHORT
+                    "Pecahan Belum Benar! $pecahan1/4 + $pecahan2/4 = $targetValue/4",
+                    Toast.LENGTH_LONG
                 ).show()
             }
         }
+    }
+
+    private fun generateRandomPizzaQuestion() {
+        // Generate dua pecahan acak (1-3) yang hasil penjumlahannya maksimal 4
+        pecahan1 = Random.nextInt(1, 4) // 1, 2, atau 3
+        pecahan2 = Random.nextInt(1, 5 - pecahan1) // Pastikan total tidak melebihi 4
+
+        // Hitung target jawaban
+        targetValue = pecahan1 + pecahan2
+
+        // Set drawable untuk pizzasoal1 dan pizzasoal2
+        // Jika hanya punya 2 drawable (pizzasoal dan pizzasoaldua), gunakan logika ini:
+        when (pecahan1) {
+            1 -> pizzaSoal1.setImageResource(R.drawable.pizzasoal)
+            2 -> pizzaSoal1.setImageResource(R.drawable.pizzasoaldua)
+            3 -> pizzaSoal1.setImageResource(R.drawable.pizza1)
+            4 -> pizzaSoal1.setImageResource(R.drawable.pizza2)
+            5 -> pizzaSoal1.setImageResource(R.drawable.pizza3)
+            6 -> pizzaSoal1.setImageResource(R.drawable.pizza4)
+        }
+
+        when (pecahan2) {
+            1 -> pizzaSoal2.setImageResource(R.drawable.pizzasoal)     // 1/4 pizza
+            2 -> pizzaSoal2.setImageResource(R.drawable.pizzasoaldua)  // 2/4 pizza
+            3 -> pizzaSoal1.setImageResource(R.drawable.pizza1)
+            4 -> pizzaSoal1.setImageResource(R.drawable.pizza2)
+            5 -> pizzaSoal1.setImageResource(R.drawable.pizza3)
+            6 -> pizzaSoal1.setImageResource(R.drawable.pizza4)
+        }
+
+        // Update teks soal untuk menunjukkan operasi yang sedang dilakukan
+        soalText.text = "+"
+
+        // Log untuk debugging
+        println("Soal Pizza: $pecahan1/4 + $pecahan2/4 = $targetValue/4")
     }
 
     private fun addStarsValue() {
