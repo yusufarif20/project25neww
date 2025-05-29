@@ -47,201 +47,203 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.61" />
 
-    <FrameLayout
+    <!-- Draggable ImageViews - KELUAR dari FrameLayout -->
+    <ImageView
+        android:id="@+id/satu"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/nosatu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301">
+        app:layout_constraintVertical_bias="0.301" />
 
-        <ImageView
-            android:id="@+id/satu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/nosatu" />
-
-        <TextView
-            android:id="@+id/text_satu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <FrameLayout
+    <ImageView
+        android:id="@+id/dua"
         android:layout_width="52dp"
         android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/nodua"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.28"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296">
+        app:layout_constraintVertical_bias="0.296" />
 
-        <ImageView
-            android:id="@+id/dua"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/nodua" />
-
-        <TextView
-            android:id="@+id/text_dua"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="2"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <FrameLayout
+    <ImageView
+        android:id="@+id/tiga"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/notiga"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.382"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301">
+        app:layout_constraintVertical_bias="0.301" />
 
-        <ImageView
-            android:id="@+id/tiga"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/notiga" />
-
-        <TextView
-            android:id="@+id/text_tiga"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="3"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <FrameLayout
+    <ImageView
+        android:id="@+id/empat"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/noempat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301">
+        app:layout_constraintVertical_bias="0.301" />
 
-        <ImageView
-            android:id="@+id/empat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/noempat" />
-
-        <TextView
-            android:id="@+id/text_empat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="4"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <FrameLayout
+    <ImageView
+        android:id="@+id/lima"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/nolima"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.594"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296">
+        app:layout_constraintVertical_bias="0.296" />
 
-        <ImageView
-            android:id="@+id/lima"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/nolima" />
-
-        <TextView
-            android:id="@+id/text_lima"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="5"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <FrameLayout
+    <ImageView
+        android:id="@+id/enam"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/noenam"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.694"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.296">
+        app:layout_constraintVertical_bias="0.296" />
 
-        <ImageView
-            android:id="@+id/enam"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/noenam" />
-
-        <TextView
-            android:id="@+id/text_enam"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="6"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <FrameLayout
+    <ImageView
+        android:id="@+id/tuju"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/notuju"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.799"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301">
+        app:layout_constraintVertical_bias="0.301" />
 
-        <ImageView
-            android:id="@+id/tuju"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/notuju" />
+    <!-- TextView untuk angka - Posisi di atas ImageView -->
+    <TextView
+        android:id="@+id/text_satu"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/satu"
+        app:layout_constraintEnd_toEndOf="@id/satu"
+        app:layout_constraintStart_toStartOf="@id/satu"
+        app:layout_constraintTop_toTopOf="@id/satu" />
 
-        <TextView
-            android:id="@+id/text_tuju"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="7"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-    </FrameLayout>
+    <TextView
+        android:id="@+id/text_dua"
+        android:layout_width="52dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/dua"
+        app:layout_constraintEnd_toEndOf="@id/dua"
+        app:layout_constraintStart_toStartOf="@id/dua"
+        app:layout_constraintTop_toTopOf="@id/dua" />
+
+    <TextView
+        android:id="@+id/text_tiga"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/tiga"
+        app:layout_constraintEnd_toEndOf="@id/tiga"
+        app:layout_constraintStart_toStartOf="@id/tiga"
+        app:layout_constraintTop_toTopOf="@id/tiga" />
+
+    <TextView
+        android:id="@+id/text_empat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="4"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/empat"
+        app:layout_constraintEnd_toEndOf="@id/empat"
+        app:layout_constraintStart_toStartOf="@id/empat"
+        app:layout_constraintTop_toTopOf="@id/empat" />
+
+    <TextView
+        android:id="@+id/text_lima"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/lima"
+        app:layout_constraintEnd_toEndOf="@id/lima"
+        app:layout_constraintStart_toStartOf="@id/lima"
+        app:layout_constraintTop_toTopOf="@id/lima" />
+
+    <TextView
+        android:id="@+id/text_enam"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="6"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/enam"
+        app:layout_constraintEnd_toEndOf="@id/enam"
+        app:layout_constraintStart_toStartOf="@id/enam"
+        app:layout_constraintTop_toTopOf="@id/enam" />
+
+    <TextView
+        android:id="@+id/text_tuju"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="7"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@id/tuju"
+        app:layout_constraintEnd_toEndOf="@id/tuju"
+        app:layout_constraintStart_toStartOf="@id/tuju"
+        app:layout_constraintTop_toTopOf="@id/tuju" />
 
     <ImageView
         android:id="@+id/submit"
