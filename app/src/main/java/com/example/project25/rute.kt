@@ -49,6 +49,10 @@ class rute : AppCompatActivity() {
     private val robotMoveDelay = 3000L // 3 detik
     private val robotStepSize = 10f
     private var isRobotMoving = false
+    private lateinit var database: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private lateinit var uid: String
+
 
     private val robotMoveRunnable = object : Runnable {
         override fun run() {
@@ -79,8 +83,18 @@ class rute : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        if (user != null) {
+            uid = user.uid
+            database = FirebaseDatabase.getInstance().reference.child("users").child(uid)
+        } else {
+            // User belum login, handle error atau arahkan login
+            Toast.makeText(this, "Anda harus login untuk menyimpan progress", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+        loadGameProgress()
         game_mode = intent.getIntExtra("game_mode", 1)
-
         if (game_mode == 1) {
             setContentView(R.layout.activity_rute)
         } else {
@@ -171,15 +185,10 @@ class rute : AppCompatActivity() {
         val hadiah6 = findViewById<ImageView>(R.id.hadiah6)
 
         hadiah.visibility = if (monster < 4 || 1 in completedHadiah) View.GONE else View.VISIBLE
-
         hadiah2.visibility = if (monster < 3 || 2 in completedHadiah) View.GONE else View.VISIBLE
-
         hadiah3.visibility = if (monster < 5 || 3 in completedHadiah) View.GONE else View.VISIBLE
-
         hadiah4.visibility = if (monster < 2 || 4 in completedHadiah) View.GONE else View.VISIBLE
-
         hadiah5.visibility = if (monster < 2 || 5 in completedHadiah) View.GONE else View.VISIBLE
-
         hadiah6.visibility = if (monster < 2 || 6 in completedHadiah) View.GONE else View.VISIBLE
 
         val forward = findViewById<ImageView>(R.id.forward)
@@ -244,6 +253,38 @@ class rute : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    private fun saveCompletedHadiah() {
+        val hadiahString = completedHadiah.joinToString(",")
+        database.child("gameProgress").child("completedHadiah").setValue(hadiahString)
+            .addOnSuccessListener {
+                Log.d(TAG, "CompletedHadiah berhasil disimpan: $hadiahString")
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Gagal menyimpan completedHadiah: ${e.message}")
+            }
+    }
+
+
+    private fun saveGameProgress() {
+        val progress = mapOf(
+            "lastPlayerX" to player.translationX,
+            "lastPlayerY" to player.translationY,
+            "lastRobotX" to robot.translationX,
+            "lastRobotY" to robot.translationY,
+            "monster" to monster,
+            "star" to star,
+            "completedHadiah" to completedHadiah.joinToString(",")
+        )
+
+        database.child("gameProgress").setValue(progress)
+            .addOnSuccessListener {
+                Log.d(TAG, "Progress game berhasil disimpan")
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "Gagal menyimpan progress game: ${e.message}")
+            }
     }
 
     private fun listenUserStars() {
@@ -402,6 +443,7 @@ class rute : AppCompatActivity() {
     private fun handleHadiahCollision(newX: Float, newY: Float, hadiahId: Int, gameClass: Class<*>, star: Int) {
         isMoving = false
         handler.removeCallbacks(moveRunnable)
+        saveCompletedHadiah()
         lastPlayerX = newX
         lastPlayerY = newY
         lastRobotX = robot.translationX
@@ -418,8 +460,46 @@ class rute : AppCompatActivity() {
         intent.putExtra("currentHadiah", hadiahId)
         intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
         startActivity(intent)
-    }
+        completedHadiah.add(hadiahId)
+        saveGameProgress()
 
+    }
+    private fun loadGameProgress() {
+        database.child("gameProgress").addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val completedString = snapshot.child("completedHadiah").getValue(String::class.java) ?: ""
+                if (completedString.isNotEmpty()) {
+                    completedHadiah.clear()
+                    completedHadiah.addAll(completedString.split(",").map { it.toInt() })
+                    Log.d(TAG, "CompletedHadiah loaded: $completedHadiah")
+                }
+                updateHadiahVisibility()
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(TAG, "Gagal load progress: ${error.message}")
+            }
+        })
+    }
+    private fun updateHadiahVisibility() {
+        val hadiahViews = listOf(
+            findViewById<ImageView>(R.id.hadiah),
+            findViewById<ImageView>(R.id.hadiah2),
+            findViewById<ImageView>(R.id.hadiah3),
+            findViewById<ImageView>(R.id.hadiah4),
+            findViewById<ImageView>(R.id.hadiah5),
+            findViewById<ImageView>(R.id.hadiah6)
+        )
+        val monsterThresholds = listOf(4, 3, 5, 2, 2, 2)
+
+        hadiahViews.forEachIndexed { index, hadiahView ->
+            val idHadiah = index + 1
+            hadiahView.visibility = if (monster < monsterThresholds[index] || idHadiah in completedHadiah) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+        }
+    }
     private fun setupBoundaries() {
         val containerView = findViewById<View>(R.id.main)
         containerView.viewTreeObserver.addOnGlobalLayoutListener(object :

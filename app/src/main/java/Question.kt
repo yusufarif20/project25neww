@@ -1,5 +1,6 @@
 data class Question(
-    val backgroundImage: Int, // Gambar latar belakang soal
-    val answers: List<Int>,   // List gambar sebagai jawaban
-    val correctAnswerIndex: Int // Index jawaban yang benar
+    val id: Int, // Tambahan ID unik
+    val backgroundImage: Int,
+    val answers: List<Int>,
+    var correctAnswerIndex: Int
 )

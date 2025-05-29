@@ -44,15 +44,16 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
     private var currentHadiah = 0
     private var completedHadiah = mutableSetOf<Int>()
 
-    // Array drawable untuk berbagai pecahan pizza
+    // Key = nilai pecahan, Value = list drawable untuk nilai itu
     private val pizzaDrawables = mapOf(
-        1 to R.drawable.pizzasoal,      // 1/4 pizza
-        2 to R.drawable.pizzasoaldua,   // 2/4 pizza
-        3 to R.drawable.pizza1,
-        4 to R.drawable.pizza2,
-        5 to R.drawable.pizza3,
-        6 to R.drawable.pizza4,
-        // Tambahkan drawable lain sesuai kebutuhan
+        3 to listOf(R.drawable.pizzasoal),            // 3/4
+        2 to listOf(R.drawable.pizzasoaldua),         // 1/2 atau 2/4
+        1 to listOf(                                  // 1/4
+            R.drawable.pizza1,
+            R.drawable.pizza2,
+            R.drawable.pizza3,
+            R.drawable.pizza4
+        )
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,37 +144,25 @@ class GamePizza : AppCompatActivity(), View.OnTouchListener {
     }
 
     private fun generateRandomPizzaQuestion() {
-        // Generate dua pecahan acak (1-3) yang hasil penjumlahannya maksimal 4
+        // Generate dua pecahan acak (misal: 1 sampai 3) dengan total maksimal 4
         pecahan1 = Random.nextInt(1, 4) // 1, 2, atau 3
-        pecahan2 = Random.nextInt(1, 5 - pecahan1) // Pastikan total tidak melebihi 4
+        pecahan2 = Random.nextInt(1, 5 - pecahan1) // Total maksimal 4
 
         // Hitung target jawaban
         targetValue = pecahan1 + pecahan2
 
-        // Set drawable untuk pizzasoal1 dan pizzasoal2
-        // Jika hanya punya 2 drawable (pizzasoal dan pizzasoaldua), gunakan logika ini:
-        when (pecahan1) {
-            1 -> pizzaSoal1.setImageResource(R.drawable.pizzasoal)
-            2 -> pizzaSoal1.setImageResource(R.drawable.pizzasoaldua)
-            3 -> pizzaSoal1.setImageResource(R.drawable.pizza1)
-            4 -> pizzaSoal1.setImageResource(R.drawable.pizza2)
-            5 -> pizzaSoal1.setImageResource(R.drawable.pizza3)
-            6 -> pizzaSoal1.setImageResource(R.drawable.pizza4)
-        }
+        // Ambil drawable acak berdasarkan nilai pecahan
+        val drawablePecahan1 = pizzaDrawables[pecahan1]?.random()
+        val drawablePecahan2 = pizzaDrawables[pecahan2]?.random()
 
-        when (pecahan2) {
-            1 -> pizzaSoal2.setImageResource(R.drawable.pizzasoal)     // 1/4 pizza
-            2 -> pizzaSoal2.setImageResource(R.drawable.pizzasoaldua)  // 2/4 pizza
-            3 -> pizzaSoal1.setImageResource(R.drawable.pizza1)
-            4 -> pizzaSoal1.setImageResource(R.drawable.pizza2)
-            5 -> pizzaSoal1.setImageResource(R.drawable.pizza3)
-            6 -> pizzaSoal1.setImageResource(R.drawable.pizza4)
-        }
+        // Pasang gambar ke ImageView soal
+        pizzaSoal1.setImageResource(drawablePecahan1 ?: R.drawable.pizzasoal)
+        pizzaSoal2.setImageResource(drawablePecahan2 ?: R.drawable.pizzasoaldua)
 
-        // Update teks soal untuk menunjukkan operasi yang sedang dilakukan
+        // Update teks operasi
         soalText.text = "+"
 
-        // Log untuk debugging
+        // Debug log
         println("Soal Pizza: $pecahan1/4 + $pecahan2/4 = $targetValue/4")
     }
 

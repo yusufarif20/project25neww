@@ -42,58 +42,7 @@ class GameDadu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_dadu)
 
-        questions = listOf(
-            Question(
-                backgroundImage = R.drawable.layoutdadu,
-                answers = listOf(
-                    R.drawable.dadutiga,
-                    R.drawable.dadusatu,
-                    R.drawable.daduempat,
-                    R.drawable.daduenam
-                ),
-                correctAnswerIndex = 2
-            ),
-            Question(
-                backgroundImage = R.drawable.layoutdadudua,
-                answers = listOf(
-                    R.drawable.dadulima,
-                    R.drawable.dadusatu,
-                    R.drawable.dadudua,
-                    R.drawable.daduempat
-                ),
-                correctAnswerIndex = 1
-            ),
-            Question(
-                backgroundImage = R.drawable.layoutdadutiga,
-                answers = listOf(
-                    R.drawable.dadulima,
-                    R.drawable.dadutiga,
-                    R.drawable.dadusatu,
-                    R.drawable.dadudua
-                ),
-                correctAnswerIndex = 0
-            ),
-            Question(
-                backgroundImage = R.drawable.layoutdaduempat,
-                answers = listOf(
-                    R.drawable.dadutiga,
-                    R.drawable.daduempat,
-                    R.drawable.dadudua,
-                    R.drawable.dadusatu
-                ),
-                correctAnswerIndex = 0
-            ),
-            Question(
-                backgroundImage = R.drawable.layoutdadulima,
-                answers = listOf(
-                    R.drawable.dadutiga,
-                    R.drawable.dadudua,
-                    R.drawable.daduenam,
-                    R.drawable.daduempat
-                ),
-                correctAnswerIndex = 1
-            )
-        ).shuffled()
+        fetchCompletedQuestionsAndStartGame()
 
         // Initialize views
         questionBackground = findViewById(R.id.splashBackground)
@@ -163,13 +112,107 @@ class GameDadu : AppCompatActivity() {
             intent.putExtra("star", star)
             intent.putExtra("game_mode", game_mode)
             intent.putExtra("completedHadiah", completedHadiah.joinToString(","))
-
             startActivity(intent)
             finish()
 
         }
+        auth = FirebaseAuth.getInstance()
+        val uid = auth.currentUser?.uid
+        if (uid != null) {
+            val dbRef = FirebaseDatabase.getInstance().reference
+            dbRef.child("users").child(uid).child("completedQuestions").get()
+                .addOnSuccessListener { snapshot ->
+                    val completedIndexes = snapshot.children.mapNotNull { it.key?.toIntOrNull() }.toSet()
+                    questions = questions.filterIndexed { i, _ -> i !in completedIndexes }.shuffled()
+                    loadQuestion(currentQuestionIndex)
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Gagal memuat progress user", Toast.LENGTH_SHORT).show()
+                    loadQuestion(currentQuestionIndex)
+                }
+        }
 
-        loadQuestion(currentQuestionIndex)
+    }
+
+    private fun fetchCompletedQuestionsAndStartGame() {
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.let {
+            val userRef = FirebaseDatabase.getInstance().getReference("users").child(it.uid)
+
+            userRef.get().addOnSuccessListener { snapshot ->
+                val completedMap = snapshot.child("completedQuestions").value as? Map<String, Boolean>
+                val completedIndexes = completedMap?.mapNotNull {
+                    if (it.value == true) it.key.toIntOrNull() else null
+                } ?: emptyList()
+
+                // Filter hanya soal yang belum dijawab
+                val allQuestions = listOf(
+                    Question(
+                        id = 1,
+                        backgroundImage = R.drawable.layoutdadu,
+                        answers = listOf(
+                            R.drawable.dadutiga,
+                            R.drawable.dadusatu,
+                            R.drawable.daduempat,
+                            R.drawable.daduenam
+                        ),
+                        correctAnswerIndex = 2
+                    ),
+                    Question(
+                        id = 2,
+                        backgroundImage = R.drawable.layoutdadudua,
+                        answers = listOf(
+                            R.drawable.dadulima,
+                            R.drawable.dadusatu,
+                            R.drawable.dadudua,
+                            R.drawable.daduempat
+                        ),
+                        correctAnswerIndex = 1
+                    ),
+                    Question(
+                        id = 3,
+                        backgroundImage = R.drawable.layoutdadutiga,
+                        answers = listOf(
+                            R.drawable.dadulima,
+                            R.drawable.dadutiga,
+                            R.drawable.dadusatu,
+                            R.drawable.dadudua
+                        ),
+                        correctAnswerIndex = 0
+                    ),
+                    Question(
+                        id = 4,
+                        backgroundImage = R.drawable.layoutdaduempat,
+                        answers = listOf(
+                            R.drawable.dadutiga,
+                            R.drawable.daduempat,
+                            R.drawable.dadudua,
+                            R.drawable.dadusatu
+                        ),
+                        correctAnswerIndex = 0
+                    ),
+                    Question(
+                        id = 5,
+                        backgroundImage = R.drawable.layoutdadulima,
+                        answers = listOf(
+                            R.drawable.dadutiga,
+                            R.drawable.dadudua,
+                            R.drawable.daduenam,
+                            R.drawable.daduempat
+                        ),
+                        correctAnswerIndex = 1
+                    )
+                )
+                questions = allQuestions.filter { it.id !in completedIndexes }.shuffled()
+                if (questions.isNotEmpty()) {
+                    currentQuestionIndex = 0
+                    loadQuestion(currentQuestionIndex)
+                } else {
+                    Toast.makeText(this, "Semua soal sudah dikerjakan!", Toast.LENGTH_LONG).show()
+                    finish()
+                }
+            }
+        }
     }
 
     private fun addStarsValue() {
@@ -208,6 +251,7 @@ class GameDadu : AppCompatActivity() {
                 star++
                 True += 1
                 currentScore += 20
+                markQuestionAsCompleted(questions[currentQuestionIndex].id)
                 addStarsValue()
             } else {
                 False += 1
@@ -226,12 +270,29 @@ class GameDadu : AppCompatActivity() {
         }
     }
 
+    private fun markQuestionAsCompleted(questionId: Int) {
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val uid = user.uid
+            val database = FirebaseDatabase.getInstance().reference
+            database.child("users").child(uid).child("completedQuestions").child(questionId.toString())
+                .setValue(true)
+        }
+    }
+
     private fun loadQuestion(index: Int) {
         val question = questions[index]
         questionBackground.setImageResource(question.backgroundImage)
 
+        val shuffledAnswers = question.answers.mapIndexed { i, resId ->
+            Pair(i, resId)
+        }.shuffled()
+
+        val newCorrectIndex = shuffledAnswers.indexOfFirst { it.first == question.correctAnswerIndex }
+        question.correctAnswerIndex = newCorrectIndex
+
         answerImageViews.forEachIndexed { i, imageView ->
-            imageView.setImageResource(question.answers[i])
+            imageView.setImageResource(shuffledAnswers[i].second)
         }
 
         framesWithBorders.forEachIndexed { i, pair ->
@@ -248,4 +309,5 @@ class GameDadu : AppCompatActivity() {
             }
         }
     }
+
 }
